@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2022/12/08 20:09:25 by isromero         ###   ########.fr       */
+/*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
+/*   Updated: 2022/12/08 20:12:01 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-
-typedef struct s_stack {
-	int				data;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
-
-typedef struct s_situation {
-	t_stack		*stack_a;
-	t_stack		*stack_b;
-}	t_situation;
-
-#endif
+t_list	*new_stack_a(void);
+{
+	t_list	*stack_a;
+	
+	stack_a = malloc(sizeof(t_stack));
+	if (!stack_a)
+		return (NULL);
+	stack_a->next = NULL;
+	stack_a->prev = NULL;
+	return (stack_a);
+}
