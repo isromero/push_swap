@@ -3,23 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2022/12/08 20:12:01 by isromero         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:43:04 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*new_stack_a(void);
+t_stack *new_node(int data)
 {
-	t_list	*stack_a;
-	
-	stack_a = malloc(sizeof(t_stack));
-	if (!stack_a)
-		return (NULL);
-	stack_a->next = NULL;
-	stack_a->prev = NULL;
-	return (stack_a);
+    t_stack *node;
+    
+    node = malloc(sizeof(t_stack));
+    if(!node)
+        return(0);
+    node->prev = NULL;
+    node->data = data;
+    node->next = NULL;
+    return(node);
 }
+
+void    print_stack(t_stack *stack)
+{
+    while(stack)
+    {
+        printf("%d\n", stack->data);
+        stack = stack->next;
+    }
+}
+
+void	node_add_back(t_stack **lst, int data)
+{
+    t_stack *new_node;
+    t_stack *last_node;
+    
+    new_node = malloc(sizeof(t_stack));
+    if(!new_node)
+        return ;
+    new_node->data = data;
+    new_node->next = NULL;
+    
+    if(!*lst) //*lst es el puntero al primer elemento de la lista. Si la lista está vacía, ese puntero apuntará a NULL, lo que significa que no hay ningún elemento en la lista. Por lo tanto, la condición !*lst comprueba si el puntero es NULL, lo que significa que la lista está vacía, y se establece el puntero al nuevo nodo creado como el primer y único elemento de la lista.
+    {
+        new_node->prev = NULL;
+        *lst = new_node;
+    }
+    else
+    {
+        last_node = *lst;
+        while(last_node->next)
+            last_node = last_node->next;
+        //el siguiente del último nodo se iguala a un nuevo nodo para poder acceder al previo a ese que es el penultimo nodo
+        last_node->next = new_node; //se enlaza el último nodo creado siempre con el next a new_node que es el primero da lista
+        new_node->prev = last_node; //se enlaza con el último nodo de la lista, el anterior a new_node
+    }
+}
+
