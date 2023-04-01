@@ -6,18 +6,18 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/03/25 22:21:16 by marvin           ###   ########.fr        #
+#    Updated: 2023/03/30 00:00:11 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 CC			=	gcc
-SRCS		=	push_swap.c check.c ready_stacks.c movements.c
+SRCS		=	push_swap.c check.c ready_stacks.c movements.c small_numbers.c sort_numbers.c
 SRCS_BONUS	=	
 
 LIBFT		=	libft/libft.a
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
 RM			=	rm -f
 OBJS		=	$(SRCS:%.c=%.o)
 

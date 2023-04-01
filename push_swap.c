@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/25 22:25:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/29 22:24:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,38 @@
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
-	t_stack *stack_b;
-	int i;
+	t_stack	*stack_b;
+
 	
 	stack_a = NULL;
 	stack_b = NULL;
-	i = 1;
 
-	while(i < argc)
+	if (argc < 2)
 	{
-		// if (!good_input(argc, argv))
-		//     ft_putstr("error input\n");
-		node_add_back(&stack_a, ft_atoi(argv[i]));
-		i++;
+		ft_putstr("Not enough parameters\n");
+		exit(1);
 	}
-	node_add_back(&stack_b, 10);
-	print_stacks(stack_a, stack_b);
-	pb(&stack_a, &stack_b);
-	pb(&stack_a, &stack_b);
-	rrr(&stack_a, &stack_b);
-	printf("\n");
-	printf("Después:\n");
-	print_stacks(stack_a, stack_b);
+	input_and_fill(argc, argv, &stack_a, &stack_b);
+	if(argc == 3)
+	{
+		sort_2(&stack_a);
+		printf("\n");
+		print_stacks(&stack_a, &stack_b);
+	}
+	if(argc == 4)
+	{
+		sort_3(&stack_a);
+		printf("\n");
+		print_stacks(&stack_a, &stack_b);
+	}
+	if(argc > 4)
+	{
+		sort_numbers(&stack_a, &stack_b);
+		printf("\n");
+		print_stacks(&stack_a, &stack_b);
+	}
+
+	
 	return (0);
 }
 
-//testeando moves de stack a

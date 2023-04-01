@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 15:01:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/24 19:15:10 by isromero         ###   ########.fr       */
+/*   Updated: 2023/03/26 21:05:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,47 @@ void    only_numbers(int argc, char **argv)
     }
 }
 
-int	good_input(int argc, char **argv)
+void    duplicated_numbers(int argc, char **argv)
 {
+    int j;
+    int i;
+    int num_i;
+    int num_j;
+
+    i = 1;
+    while(i < argc)
+    {
+        num_i = ft_atoi(argv[i]);
+        j = i + 1;
+        while(j < argc)
+        {
+            num_j = ft_atoi(argv[j]);
+            if(num_i == num_j)
+                {
+                    ft_putstr("Duplicated number\n");
+                    exit(1);
+                }
+            j++;
+        }
+        i++;
+    }
+}
+
+int input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
+{
+    int i;
+
+    i = 1;
     only_numbers(argc, argv);
-	//int	i;
-    //int num;
-    //num = ft_atoi(argv[i]);
-            // if (num == -1) //(no puedo utilizar porque -1 es un valor válido... esto arregla por ejemplo ./push_swap 54867543867438 3 o ./push_swap "214748364748385 28 47 29" Revisar si debería dar error -2147483647765 4 5?????
-            // {
-            //     ft_putstr("error\n");
-            //     exit(1);
-            // }
+    duplicated_numbers(argc, argv);
+    while(i < argc)
+	{
+		// if (!good_input(argc, argv))
+		//     ft_putstr("error input\n");
+		node_add_back(stack_a, ft_atoi(argv[i]));
+		i++;
+	}
+    print_stacks(stack_a, stack_b);
 	return (0);
 }
 

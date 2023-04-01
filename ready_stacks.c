@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/25 20:55:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/26 20:37:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ t_stack *new_node(int data)
 	return(node);
 }
 
-void    print_stacks(t_stack *stack_a, t_stack *stack_b)
+void    print_stacks(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*node_a;
 	t_stack	*node_b;
 	
-	node_a = stack_a;
-	node_b = stack_b;
+	node_a = *stack_a;
+	node_b = *stack_b;
   	while (node_a || node_b) {
         if (node_a) {
             printf("%d", node_a->data);

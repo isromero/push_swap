@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/25 22:23:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/30 19:36:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void    sa(t_stack **lst)
 	if(node_c) 
     	node_a->next = node_c;
 	//node_b ahora contiene la información del primer nodo(no es necesario si se hace: node_b->next = node_a
-    *lst = node_b; 
+    *lst = node_b;
+	printf("sa\n");
 }
 
 //Se intercambian los 2 primeros nodos de stack_b si hay más de 1
@@ -61,7 +62,8 @@ void    sb(t_stack **lst)
 	if(node_c) 
     	node_a->next = node_c;
 	//node_b ahora contiene la información del primer nodo(no es necesario si se hace: node_b->next = node_a
-    *lst = node_b; 
+    *lst = node_b;
+	printf("sb\n");
 }
 
 //Se hace sa y sb a la vez
@@ -69,6 +71,7 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	sa(stack_a);
 	sb(stack_b);
+	printf("ss\n");
 }
 
 /*-----------------------------------------PUSH-----------------------------------------*/
@@ -94,6 +97,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 		(*stack_a)->prev = node_stack_b;
 	//Esto es necesario para actualizar el puntero que apunta al primer elemento de la lista de stack_a
 	*stack_a = node_stack_b;
+	printf("pa\n");
 }
 
 //Coge el primer nodo de stack a y lo pone encima de stack b
@@ -116,6 +120,7 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 		(*stack_b)->prev = node_stack_a;
 	//Esto es necesario para actualizar el puntero que apunta al primer elemento de la lista de stack_b
 	*stack_b = node_stack_a;
+	printf("pb\n");
 }
 
 /*-----------------------------------------ROTATE-----------------------------------------*/
@@ -145,6 +150,7 @@ void	ra(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	printf("ra\n");
 }
 
 //El primer nodo pasa a ser el último en el stack_b
@@ -172,6 +178,7 @@ void	rb(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	printf("rb\n");
 }
 
 //Se hace ra y rb a la vez
@@ -179,6 +186,7 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ra(stack_a);
 	rb(stack_b);
+	printf("rr\n");
 }
 
 /*-----------------------------------------REVERSE ROTATE-----------------------------------------*/
@@ -213,6 +221,7 @@ void rra(t_stack **lst)
 	//Se crea una auxiliar porque:  en rra, el primer nodo de la lista original se convierte 
 	//en el último nodo de la lista rotada, y su campo next debe apuntar a NULL, ya que no hay más 
 	//elementos después de él. Por lo tanto, se pierde la referencia al resto de la lista.
+	printf("rra\n");
 }
 
 //El último nodo de stack_b pasa a ser el primero
@@ -245,6 +254,7 @@ void rrb(t_stack **lst)
 	//Se crea una auxiliar porque:  en rra, el primer nodo de la lista original se convierte 
 	//en el último nodo de la lista rotada, y su campo next debe apuntar a NULL, ya que no hay más 
 	//elementos después de él. Por lo tanto, se pierde la referencia al resto de la lista.
+	printf("rrb\n");
 }
 
 //Se hace rra y rrb a la vez
@@ -252,4 +262,5 @@ void rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	rra(stack_a);
 	rrb(stack_b);
+	printf("rrr\n");
 }
