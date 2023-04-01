@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/31 19:30:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/01 15:49:28 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ bool 	is_stack_b_sorted(t_stack *stack_b);
 int 	find_max_number(t_stack *stack);
 int 	find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
+int 	pop(t_stack **stack);
 
 #endif

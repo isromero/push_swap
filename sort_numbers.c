@@ -18,18 +18,18 @@ void    sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
 
-	while (*stack_a != NULL)
-    {
-        if (*stack_a == NULL)
-            break;
-        check_movements_and_pb(stack_a, stack_b);
-    }
+    check_movements_and_pb(stack_a, stack_b);
+
 }
 
 int calculate_moves(int num, t_stack *stack_b)
 {
     int moves = 0;
     t_stack *current = stack_b;
+
+    if (current == NULL || num < current->data) {
+        return moves;
+    }
 
     while (current != NULL && num < current->data)
     {
@@ -120,8 +120,11 @@ void check_movements_and_pb(t_stack **stack_a, t_stack **stack_b)
     t_stack *best_node = NULL;
     int moves;
     int min_moves = INT_MAX;
-
-    current_a = *stack_a;
+    
+	while(*stack_a != NULL)
+	{
+	current_a = *stack_a;
+	int min_moves = INT_MAX;
     while (current_a)
     {
         moves = find_min_moves(current_a, *stack_b);
@@ -131,25 +134,45 @@ void check_movements_and_pb(t_stack **stack_a, t_stack **stack_b)
             best_node = current_a;
         }
         current_a = current_a->next;
+		
     }
-    while (best_node != NULL)
-    {
         // Verificar si el nodo seleccionado es el número más grande de stack_b
         if (best_node->data > (*stack_b)->data)
         {
-			printf("que pasa chavalesss\n");
-			while (*stack_b != NULL && (*stack_b)->next != NULL && (*stack_b)->data != find_max_number(*stack_b))
+			
+            while ((*stack_b)->data != find_max_number(*stack_b))
                 rrb(stack_b);
             pb(stack_a, stack_b);
         }
-		//Ahora quiero la condición del número menor y quiero que sea menor que el primero y < que el ultimo por lo tanto sera el menor del stack b
-		int min_number = find_min_number(*stack_b);
-		t_stack *last_node_b = get_last_node(*stack_b);
-		if (best_node->data <  (*stack_b)->data)
-   			pb(stack_a, stack_b);
-		if (best_node->data < last_node_b->data || (best_node->data < (*stack_b)->data && last_node_b->data == min_number))
-    		rrb(stack_b);
-		pb(stack_a, stack_b);
-    }
+        //Ahora quiero la condición del número menor y quiero que sea menor que el primero y < que el ultimo por lo tanto sera el menor del stack b
+        int min_number = find_min_number(*stack_b);
+        t_stack *last_node_b = get_last_node(*stack_b);
+		if (best_node->data < (*stack_b)->data && best_node->data < get_last_node(*stack_b)->data && best_node->data == min_number)
+        {
+
+            pb(stack_a, stack_b);
+            rb(stack_b);
+        }
+		t_stack *current_b = *stack_b;
+		while(best_node->data > last_node_b->data && best_node->data < (*stack_b)->data)
+		{
+			printf("hola\n");
+			rb(stack_b);
+			if(best_node->data < current_b->data)
+				pb(stack_a, stack_b);
+			while(!(best_node->data > last_node_b->data && best_node->data < current_b->data)) //current_b->next != NULL = no seg fault
+			{
+				if(current_b->data > best_node->data && current_b->prev->data < best_node->data)
+					pb(stack_a, stack_b);
+				if(!(current_b->data > best_node->data && current_b->prev->data < best_node->data))
+				{
+					pb(stack_a, stack_b);
+					rb(stack_b);
+				}
+				current_b = current_b->next;
+			}
+		}
+		*stack_a = (*stack_a)->next; //Al poner esto sabe cuando parar ya que recorre constantemente el stack y cuando esta vacio ya no existe y se sale del bucle
+	}
 }
 
