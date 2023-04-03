@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 15:01:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/26 21:05:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/03 17:54:03 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
     int i;
 
     i = 1;
-    only_numbers(argc, argv);
+    //only_numbers(argc, argv);
     duplicated_numbers(argc, argv);
     while(i < argc)
 	{

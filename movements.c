@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/03/30 19:36:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/03 21:35:32 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,34 +227,20 @@ void rra(t_stack **lst)
 //El último nodo de stack_b pasa a ser el primero
 void rrb(t_stack **lst)
 {
-	t_stack *first_node;
-	t_stack	*last_node;
-	t_stack	*dont_lose_info;
-	
-	if (!(*lst) || !(*lst)->next) //No necesario realmente
-		return ;
-
-	//El primero nodo apunta al principio de la lista
-	first_node = *lst;
-	//El primer nodo ahora apunta al último para poder recorrer desde ahí
-	last_node = first_node;
-	
-	//Un bucle que encuentra el último de last_node
-	while(last_node->next)
-		last_node = last_node->next;
-
-	dont_lose_info = last_node->prev; //Se guarda el penúltimo nodo(se puede hacer en el while sin el prev). Este se guarda ya que posteriormente tiene que apuntar a NULL para no entrar en bucle
-	*lst = last_node;
-
-	//El último nodo ahora es el primero por lo que el siguiente será el antiguo primero, donde ahora es segundo
-	last_node->next = first_node;
-	//Ponemos el penúltimo nodo, que ahora es el último a NULL para no entrar en bucle y que sea el final de la lista
-	dont_lose_info->next = NULL;
-
-	//Se crea una auxiliar porque:  en rra, el primer nodo de la lista original se convierte 
-	//en el último nodo de la lista rotada, y su campo next debe apuntar a NULL, ya que no hay más 
-	//elementos después de él. Por lo tanto, se pierde la referencia al resto de la lista.
-	printf("rrb\n");
+    //esta wea nos pone ultimo primero
+	t_stack *new_node = malloc(sizeof(t_stack));
+    t_stack *secLast = NULL;
+    
+    new_node->next = *lst;
+    while(new_node->next != NULL)
+    {
+        secLast = new_node;
+        new_node = new_node->next;
+    }
+    secLast->next = NULL;
+    new_node->next = *lst;
+    *lst = new_node;
+    ft_putstr("rrb\n");
 }
 
 //Se hace rra y rrb a la vez

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/01 15:49:28 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/03 21:08:53 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ void	check_movements_and_pb(t_stack **stack_a, t_stack **stack_b);
 int 	calculate_moves(int num, t_stack *stack_b);
 int 	find_min_moves(t_stack *stack_a, t_stack *stack_b);
 int		ft_lstsize2(t_stack *lst);
-bool 	is_stack_b_sorted(t_stack *stack_b);
+int     is_stack_sorted(t_stack *stack);
 int 	find_max_number(t_stack *stack);
 int 	find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
-int 	pop(t_stack **stack);
+int     get_steps_to_top(t_stack *stack, int data);
+int     get_steps_to_bottom(t_stack *stack, int data);
+void    short_path_rb_or_rrb(t_stack **stack);
 
 #endif

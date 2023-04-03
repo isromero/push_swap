@@ -19,7 +19,6 @@ void    sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_a, stack_b);
 
     check_movements_and_pb(stack_a, stack_b);
-    
 
 }
 
@@ -93,19 +92,6 @@ int find_min_number(t_stack *stack)
 }
 
 
-bool is_stack_b_sorted(t_stack *stack_b)
-{
-	t_stack *current = stack_b;
-
-	while (current->next != NULL)
-	{
-		if (current->data < current->next->data)
-			return false;
-		current = current->next;
-	}
-	return true;
-}
-
 t_stack	*get_last_node(t_stack *stack)
 {
 	if (stack == NULL)
@@ -115,12 +101,59 @@ t_stack	*get_last_node(t_stack *stack)
 	return (stack);
 }
 
+int is_stack_sorted(t_stack *stack)
+{
+    while (stack && stack->next)
+    {
+        if (stack->data < stack->next->data)
+            return 0;
+        stack = stack->next;
+    }
+    return 1;
+}
+
+int rb_short_path(t_stack *stack)
+{
+    int count = 0;
+    int max = find_max_number(stack);
+    while (stack && stack->data != max)
+    {
+        stack = stack->next;
+        count++;
+    }
+    return count;
+}
+
+int rrb_short_path(t_stack *stack)
+{
+    int count = 0;
+    int min = find_min_number(stack);
+    while (stack && stack->data != min)
+    {
+        stack = stack->next;
+        count++;
+    }
+    return count;
+}
+
+void    short_path_rb_or_rrb(t_stack **stack)
+{
+    if (rrb_short_path(*stack) <= rb_short_path(*stack))
+        rrb(stack);
+    else
+        rb(stack);
+}
+
+//Si el mínimo se encuentra más tarde(es decir, es mayor la longitud a la del máximo) que el máximo es mejor hacer rrb para conseguir el orden ascendiente
+
 void check_movements_and_pb(t_stack **stack_a, t_stack **stack_b)
 {
     t_stack *current_a = NULL;
     t_stack *best_node = NULL;
     int moves;
     int min_moves = INT_MAX;
+    int min_number = find_min_number(*stack_b);
+    t_stack *last_node_b = get_last_node(*stack_b);
     
 	while(*stack_a != NULL)
 	{
@@ -138,14 +171,12 @@ void check_movements_and_pb(t_stack **stack_a, t_stack **stack_b)
 		
         }
         // Verificar si el nodo seleccionado es el número más grande de stack_b
-        while ((*stack_b)->data != find_max_number(*stack_b) && best_node->data <= get_last_node(*stack_b)->data)
+        while ((*stack_b)->data != find_max_number(*stack_b))
             rb(stack_b);
-        if (best_node->data > (*stack_b)->data)
+        if (best_node->data > find_max_number(*stack_b) && find_max_number(*stack_b) == (*stack_b)->data)
             pb(stack_a, stack_b);
-       
         //Ahora quiero la condición del número menor y quiero que sea menor que el primero y < que el ultimo por lo tanto sera el menor del stack b
-        int min_number = find_min_number(*stack_b);
-        t_stack *last_node_b = get_last_node(*stack_b);
+       
 		if (best_node->data < (*stack_b)->data && best_node->data < get_last_node(*stack_b)->data && best_node->data < min_number)
         {
 
@@ -155,18 +186,16 @@ void check_movements_and_pb(t_stack **stack_a, t_stack **stack_b)
 		t_stack *current_b = *stack_b;
 	    if (best_node->data > get_last_node(*stack_b)->data && best_node->data < (*stack_b)->data)
         {
-        rb(stack_b);
-        while (best_node->data < get_last_node(*stack_b)->data && best_node->data < (*stack_b)->data) 
-        {
             rb(stack_b);
-        }
-        if (best_node->data < get_last_node(*stack_b)->data && best_node->data > (*stack_b)->data)
-            pb(stack_a, stack_b);
+            while (best_node->data < get_last_node(*stack_b)->data && best_node->data < (*stack_b)->data) 
+                rb(stack_b);
+            if (best_node->data < get_last_node(*stack_b)->data && best_node->data > (*stack_b)->data)
+                pb(stack_a, stack_b);
         }
 	}
+    while(!is_stack_sorted(*stack_b))
+        short_path_rb_or_rrb(stack_b);
     while(*stack_b != NULL)
-    {
         pa(stack_a, stack_b);
-    }
 }
 
