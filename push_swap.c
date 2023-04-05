@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/03 22:16:03 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/05 21:02:10 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,13 @@ int main(int argc, char **argv)
 		printf("\n");
 		print_stacks(&stack_a, &stack_b);
 	}
-	if(argc > 4)
+    if(argc == 6)
+	{
+		sort_5(&stack_a, &stack_b);
+		printf("\n");
+		print_stacks(&stack_a, &stack_b);
+	}
+	if(argc > 6)
 	{
 		sort_numbers(&stack_a, &stack_b);
 		printf("\n");

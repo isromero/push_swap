@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/03/30 00:00:11 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/04 21:35:40 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 CC			=	gcc
-SRCS		=	push_swap.c check.c ready_stacks.c movements.c small_numbers.c sort_numbers.c
+SRCS		=	push_swap.c check.c ready_stacks.c movements.c small_numbers.c sort_numbers.c utils.c
 SRCS_BONUS	=	
 
 LIBFT		=	libft/libft.a

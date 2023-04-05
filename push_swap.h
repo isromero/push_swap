@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/03 21:08:53 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/05 21:02:48 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_stack {
     struct s_stack	*prev;
 	int				data;
 	struct s_stack	*next;
+    int             index;
 }	t_stack;
 
 // typedef struct s_situation {
@@ -63,6 +64,10 @@ void rrr(t_stack **stack_a, t_stack **stack_b);
 
 void    sort_2(t_stack **stack_a);
 void    sort_3(t_stack **stack_a);
+void    sort_5(t_stack **stack_a, t_stack **stack_b);
+
+
+int     is_sorted(t_stack *stack);
 
 
 void    sort_numbers(t_stack **stack_a, t_stack **stack_b);
