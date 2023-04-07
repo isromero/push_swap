@@ -73,7 +73,8 @@ int	ft_lstsize2(t_stack *lst)
 }
 
 int find_max_number(t_stack *stack)
-{
+{    if(!stack)
+        return 0;
     int max_number = INT_MIN;
     while (stack)
     {
@@ -86,11 +87,16 @@ int find_max_number(t_stack *stack)
 
 int find_min_number(t_stack *stack)
 {
+    if(!stack)
+        return 0;
     int min_number = INT_MAX;
     while (stack)
     {
         if (stack->data < min_number)
+        {
             min_number = stack->data;
+        }
+            
         stack = stack->next;
     }
     return min_number;
@@ -99,7 +105,7 @@ int find_min_number(t_stack *stack)
 
 t_stack	*get_last_node(t_stack *stack)
 {
-	if (stack == NULL)
+	if (!stack)
 		return (NULL);
 	while (stack->next != NULL)
 		stack = stack->next;

@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/05 21:02:48 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:31:16 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int     is_stack_sorted(t_stack *stack);
 int 	find_max_number(t_stack *stack);
 int 	find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
-int     get_steps_to_top(t_stack *stack, int data);
-int     get_steps_to_bottom(t_stack *stack, int data);
 void    short_path_rb_or_rrb(t_stack **stack);
 
 #endif
