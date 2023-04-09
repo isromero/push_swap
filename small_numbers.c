@@ -59,7 +59,6 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
 
-
 	sort_3(stack_a);
 	while (*stack_b)
 	{
@@ -87,14 +86,12 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 			{
 				rra(stack_a);
 				pa(stack_a, stack_b);
-				//STOPS HERE, It does not matter if it is pa, or another type of movement------------------------------------------------------------------------------
 				ra(stack_a);
 				ra(stack_a);
 			}   
 		}
 		if(ft_lstsize2(*stack_a) == 4)
 		{
-			
 			//Checkeamos si el primer nodo es el mínimo y es < que todos los nodos de A(4) después de que quede 1 nodo en B
 			if((*stack_b)->data > (*stack_a)->data && (*stack_b)->data < (*stack_a)->next->data)
 			{
@@ -104,9 +101,8 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 			else if((*stack_b)->data > (*stack_a)->next->data && (*stack_b)->data < (*stack_a)->next->next->data)
 			{
 				ra(stack_a);
-				ra(stack_a);
 				pa(stack_a, stack_b);
-				rra(stack_a);
+				sa(stack_a);
 				rra(stack_a);
 			}
 			else if((*stack_b)->data > (*stack_a)->next->next->data && (*stack_b)->data < get_last_node(*stack_a)->data)

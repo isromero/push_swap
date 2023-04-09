@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/07 21:31:16 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/08 18:25:22 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	rb(t_stack **lst);
 void	rr(t_stack **stack_a, t_stack **stack_b);
 
 
-void rra(t_stack **lst);
-void rrb(t_stack **lst);
-void rrr(t_stack **stack_a, t_stack **stack_b);
+void    rra(t_stack **lst);
+void    rrb(t_stack **lst);
+void    rrr(t_stack **stack_a, t_stack **stack_b);
 
 
 void    sort_2(t_stack **stack_a);
@@ -68,17 +68,15 @@ void    sort_5(t_stack **stack_a, t_stack **stack_b);
 
 
 int     is_sorted(t_stack *stack);
-
-
-void    sort_numbers(t_stack **stack_a, t_stack **stack_b);
-void	check_movements_and_pb(t_stack **stack_a, t_stack **stack_b);
-int 	calculate_moves(int num, t_stack *stack_b);
-int 	find_min_moves(t_stack *stack_a, t_stack *stack_b);
 int		ft_lstsize2(t_stack *lst);
-int     is_stack_sorted(t_stack *stack);
+int     is_sorted(t_stack *stack);
 int 	find_max_number(t_stack *stack);
 int 	find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
+
+
+
+void    sort_100(t_stack **stack_a, t_stack **stack_b);
 void    short_path_rb_or_rrb(t_stack **stack);
 
 #endif
