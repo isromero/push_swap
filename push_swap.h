@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/08 18:25:22 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:42:16 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ typedef struct s_stack {
     struct s_stack	*prev;
 	int				data;
 	struct s_stack	*next;
-    int             index;
+    int             rank;
+    int             top_movements;
+    int             bottom_movements;
 }	t_stack;
 
 // typedef struct s_situation {
@@ -71,12 +73,20 @@ int     is_sorted(t_stack *stack);
 int		ft_lstsize2(t_stack *lst);
 int     is_sorted(t_stack *stack);
 int 	find_max_number(t_stack *stack);
-int 	find_min_number(t_stack *stack);
+int		find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
+int		minimum_rotate_movements(t_stack *stack_a);
+void   	rb_or_rrb(t_stack **stack_b);
+int		get_index(t_stack *stack, int value);
+void    top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest);
+void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest);
 
-
-
+int    *save_20_smallest_chunk(t_stack *stack_a);
+void    push_to_b_good_position(t_stack *stack_b);
 void    sort_100(t_stack **stack_a, t_stack **stack_b);
 void    short_path_rb_or_rrb(t_stack **stack);
+int     rrb_short_path(t_stack *stack);
+int     top_to_bottom(t_stack *stack, int *selected);
+int     bottom_to_top(t_stack *stack, t_stack *last, int *selected);
 
 #endif
