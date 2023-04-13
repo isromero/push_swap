@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/12 21:42:06 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:26:11 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ int is_sorted(t_stack *stack)
     while (stack && stack->next)
     {
         if (stack->data > stack->next->data)
+            return 0;
+        stack = stack->next;
+    }
+    return 1;
+}
+
+int is_descending_sorted(t_stack *stack)
+{
+    while (stack && stack->next)
+    {
+        if (stack->data < stack->next->data)
             return 0;
         stack = stack->next;
     }
@@ -117,33 +128,35 @@ int   minimum_rotate_movements(t_stack *stack_a)
     return (movements);
 }
 
-int top_to_bottom(t_stack *stack, int *selected)
+int top_to_bottom(t_stack *stack, t_stack *current_a)
 {
-    t_stack *temp = stack;
 	int count = 0;
 	int max = get_last_node(stack)->data;
-	while (temp && temp->data != max)
+	while (stack && stack->data != max)
 	{
-        if (temp->data == *selected)
+        if (stack->data == current_a->data)
             break ;
-		temp = temp->next;
+		stack = stack->next;
 		count++;
 	}
 	return count;
 }
 
-int bottom_to_top(t_stack *stack, t_stack *last, int *selected)
+int bottom_to_top(t_stack *stack, t_stack *last)
 {
 	int count = 0;
-	int min = stack->data;
-	while (last && last->data != min)
+    t_stack *top = stack;
+	int min = top->data;
+    stack = get_last_node(stack);
+    
+	while (stack && stack->data != min)
 	{
-        if (last->data == *selected)
+        if (stack->data == last->data)
             break ;
-		last = last->prev;
+		stack = stack->prev;
 		count++;
 	}
-	return count; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
+	return count + 1; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
 }
 
 int rrb_short_path(t_stack *stack)
