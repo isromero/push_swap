@@ -71,23 +71,20 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
     for (int i = 0; i < 20; i++)
         printf("%d ", smallest[i]);
     printf("\n");
-
-    for (i = 0; i < 20; i++)
-    {
-        t_stack *current_a = *stack_a;
+     t_stack *current_a = *stack_a;
         t_stack *current_a_last = get_last_node(*stack_a);
 
-        while (current_a != NULL && current_a_last != NULL)
-        {
+    // for (i = 0; i < 20; i++)
+    // {
+       
+            //ESTO ES NUEVO, LE QUITE EL BUCLE CURRENT Y LAST != NULL Y QUE VAYA AVANZANDO PARA QUE NO RECORRA UNO DENTRO DEL OTRO
+ 
             top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
-            current_a = current_a->next;
-            current_a_last = current_a_last->prev;
-        }
 
-        if (ft_lstsize2(*stack_b) == 20)
-            break;
-        printf("esta es la i jeje: %d\n", i);
-    }
+
+
+    //     printf("esta es la i jeje: %d\n", i);
+    // }
 }
 
 
@@ -100,29 +97,28 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
     t_stack *bottom_node = NULL;  // Variable para guardar el nodo seleccionado por bottom_to_top()
     bool current_aa = 0;
     bool last_aa = 0;
+    current_a = *stack_a; //ESTO ES NUEVO
+    last = get_last_node(*stack_a); //ESTO ES NUEVO
 
     while (current_a != NULL && last != NULL)
     {
-        if(current_a->data >= smallest[19] && current_a->data <= smallest[0] && current_a->data == (*stack_a)->data)
-        {
-            check_position_to_push_b(stack_a, stack_b, current_a, last, smallest);
-        }
-           
-        if(last->data >= smallest[19] && last->data <= smallest[0] && last->data == get_last_node(*stack_a)->data)
-        {
-            rra(stack_a);
-            check_position_to_push_b(stack_a, stack_b, current_a, last, smallest);
-        }
         if (current_a->data >= smallest[19] && current_a->data <= smallest[0])
         {
-            current_aa = 1;
             top_node = current_a;  // Guardamos el nodo seleccionado por top_to_bottom()
+            current_aa = 1;
         }
             
         if(last->data >= smallest[19] && last->data <= smallest[0])
         {
-            last_aa = 1;
+           
             bottom_node = last;  // Guardamos el nodo seleccionado por bottom_to_top()
+            last_aa = 1;
+        }
+        if(last->data >= smallest[19] && last->data <= smallest[0] && current_aa == 1)
+        {
+            bottom_movements = bottom_to_top(temp, bottom_node);
+            printf("bottom: %d\n", bottom_movements);
+            last->bottom_movements = bottom_movements;
         }
         if (current_a->data >= smallest[19] && current_a->data <= smallest[0] && last_aa == 1)
         {
@@ -130,14 +126,7 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
             printf("top: %d\n", top_movements);
             current_a->top_movements = top_movements;
         }
-        if(last->data >= smallest[19] && last->data <= smallest[0] && current_aa == 1)
-        {
-            bottom_movements = bottom_to_top(temp, bottom_node);
-            printf("bottom: %d\n", bottom_movements);
-            last->bottom_movements = bottom_movements;
-            
-        }
-        if (top_node != NULL && bottom_node != NULL && last_aa == 1 && current_aa == 1) //Se checkea para ver si los dos bucles han encontrado smallest
+        if (top_node != NULL && bottom_node != NULL && last_aa == 1 && current_aa == 1)
         {
             if (current_a->top_movements < last->bottom_movements)
             {
@@ -163,9 +152,9 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
             }
             else if(current_a->top_movements == last->bottom_movements)
             {
-                while (top_node != *stack_a && bottom_node != *stack_a)
+                while (top_node != *stack_a || bottom_node != *stack_a)
                     ra(stack_a);
-                if(top_node == *stack_a && bottom_node == *stack_a)
+                if(top_node == *stack_a || bottom_node == *stack_a)
                 {
                     check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
                     current_aa = 0;
@@ -175,6 +164,7 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
             // Reiniciamos las variables para la siguiente iteración
             top_node = NULL;
             bottom_node = NULL;
+            
         }
         current_a = current_a->next;
         last = last->prev;
@@ -193,21 +183,33 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
     {
         if(*stack_b == NULL)
             pb(stack_a, stack_b);
-        if(current_a->data > (*stack_b)->data && current_a->data <= find_max_number(*stack_b)) // esta es la condicion correcta para el 30? if(current_a->data > (*stack_b)->data && current_a->data <= find_max_number(*stack_b))
-            pb(stack_a, stack_b); //el 30 entra despues del 16
-        if(last->data > (*stack_b)->data && (*stack_b)->data == find_max_number(*stack_b)) //Esta es la condicion antigua, al cambiarla hace cosas wow
-            pb(stack_a, stack_b);
-        if(current_a->data < get_last_node(*stack_b)->data && get_last_node(*stack_b)->data == find_min_number(*stack_b))
+        else if(((last->data < (*stack_b)->data)) && ft_lstsize2(*stack_b) == 1) //he quitado current, tengo que añadirlo, pero sin el, hay cosas que funcionan
         {
+            printf("hola\n");
             pb(stack_a, stack_b);
             rb(stack_b);
         }
-        if(last->data < get_last_node(*stack_b)->data && get_last_node(*stack_b)->data == find_min_number(*stack_b))
+        else if((current_a->data > (*stack_b)->data || (last->data > (*stack_b)->data)) && ft_lstsize2(*stack_b) == 1)
+            pb(stack_a, stack_b);
+        //Falla el 8 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // else if(current_a->data > (*stack_b)->data && current_a->data >= find_max_number(*stack_b) && (*stack_b)->data == find_max_number(*stack_b))
+        //     pb(stack_a, stack_b); 
+        // else if(last->data > (*stack_b)->data && last->data >= find_max_number(*stack_b) && (*stack_b)->data == find_max_number(*stack_b)) 
+        //     pb(stack_a, stack_b); 
+        else if(current_a->data < get_last_node(*stack_b)->data && current_a->data <= find_min_number(*stack_b) && get_last_node(*stack_b)->data == find_min_number(*stack_b))
         {
+            printf("que pasaaa peña\n");
             pb(stack_a, stack_b);
             rb(stack_b);
         }
-        if (!((current_a->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((current_a->data > smallest[j] && (*stack_b)->data == smallest[j])) || 
+        else if(last->data < get_last_node(*stack_b)->data && last->data <= find_min_number(*stack_b) && get_last_node(*stack_b)->data == find_min_number(*stack_b))
+        {
+            printf("que pasaaa git\n");
+            pb(stack_a, stack_b);
+            rb(stack_b);
+        }
+        
+        else if (!((current_a->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((current_a->data > smallest[j] && (*stack_b)->data == smallest[j])) || 
             (!((last->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((last->data > smallest[j] && (*stack_b)->data == smallest[j]))))
         {
             while(smallest[i]) // A LO MEJOR TENGO QUE AGREGAR UN SMALLEST_PUSHED
