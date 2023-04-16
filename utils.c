@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/14 09:57:02 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/16 11:24:50 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int bottom_to_top(t_stack *stack, t_stack *last)
 	int count = 0;
     t_stack *top = stack;
 	int min = top->data;
-    stack = get_last_node(stack);
+    stack->data = get_last_node(stack)->data;
     
 	while (stack && stack->data != min)
 	{
