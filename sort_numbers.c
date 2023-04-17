@@ -66,6 +66,7 @@ int    *save_20_smallest_chunk(t_stack *stack_a)
 void sort_100(t_stack **stack_a, t_stack **stack_b)
 {
 	int i;
+	int	j;
 	int	*smallest = save_20_smallest_chunk(*stack_a);
 	printf("Esto es smallest: ");
 	for (int i = 0; i < 20; i++)
@@ -74,13 +75,28 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	t_stack *current_a = *stack_a;
 	t_stack *current_a_last = get_last_node(*stack_a);
 
-	for (i = 0; i < 20; i++) // 
+	for (i = 0; i < 100; i++) // 
 	{
-		current_a = *stack_a;
-		current_a_last = get_last_node(*stack_a);
-		top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
-		print_stacks(stack_a, stack_b);
+		int	*smallest = save_20_smallest_chunk(*stack_a);
+		j = 0;
+		while(j < 20)
+		{
+			current_a = *stack_a;
+			current_a_last = get_last_node(*stack_a);
+			top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
+			print_stacks(stack_a, stack_b);
+			j++;
+		}
+		free(smallest);
+		if (ft_lstsize2(*stack_b) == 100)
+			break ;
 	}
+	if(is_descending_sorted(*stack_b) && ft_lstsize2(*stack_b) == 100)
+	{
+		while(*stack_b != NULL)
+			pa(stack_a, stack_b);
+	}
+	
 }
 
 
