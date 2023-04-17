@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/16 11:24:50 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:56:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,14 +146,15 @@ int bottom_to_top(t_stack *stack, t_stack *last)
 {
 	int count = 0;
     t_stack *top = stack;
+    t_stack *temp = stack;
 	int min = top->data;
-    stack->data = get_last_node(stack)->data;
     
-	while (stack && stack->data != min)
+    
+	while (temp && temp->data != min)
 	{
-        if (stack->data == last->data)
+        if (temp->data == last->data)
             break ;
-		stack = stack->prev;
+		temp = temp->prev;
 		count++;
 	}
 	return count + 1; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra

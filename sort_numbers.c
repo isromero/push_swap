@@ -74,12 +74,12 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	t_stack *current_a = *stack_a;
 	t_stack *current_a_last = get_last_node(*stack_a);
 
-	for (i = 0; i < 6; i++) // 
+	for (i = 0; i < 20; i++) // 
 	{
-		t_stack *current_a = *stack_a;
-		t_stack *current_a_last = get_last_node(*stack_a);
+		current_a = *stack_a;
+		current_a_last = get_last_node(*stack_a);
 		top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
-	    printf("esta es la i jeje: %d\n", i);
+		print_stacks(stack_a, stack_b);
 	}
 }
 
@@ -89,8 +89,8 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 	t_stack *temp = *stack_a;
 	int top_movements = 0;
 	int bottom_movements = 0;
-	t_stack *top_node = NULL;  // Variable para guardar el nodo seleccionado por top_to_bottom()
-	t_stack *bottom_node = NULL;  // Variable para guardar el nodo seleccionado por bottom_to_top()
+	//t_stack *top_node = NULL;
+	//t_stack *bottom_node = NULL;
 
 	while(!(current_a->data >= smallest[19] && current_a->data <= smallest[0]))
 		current_a = current_a->next;
@@ -98,28 +98,22 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 		last = last->prev;
 	if (current_a->data >= smallest[19] && current_a->data <= smallest[0])
 	{
-		top_node = current_a;
-		printf("dataaaaaa topp: %d\n", top_node->data);
-		top_movements = top_to_bottom(temp, top_node);
-		printf("top: %d\n", top_movements);
+		//top_node = current_a;
+		top_movements = top_to_bottom(temp, current_a);
 		current_a->top_movements = top_movements;
 	}
 	if(last->data >= smallest[19] && last->data <= smallest[0])
 	{
-		
-		bottom_node = last;
-		printf("dataaaaaa: %d\n", bottom_node->data);
-		bottom_movements = bottom_to_top(temp, bottom_node);
-		printf("bottom: %d\n", bottom_movements);
+		//bottom_node = last;
+		bottom_movements = bottom_to_top(temp, last);
 		last->bottom_movements = bottom_movements;
 	}
 	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a->data >= smallest[19] && current_a->data <= smallest[0])
-		movements_checker_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
+		movements_checker_to_push_b(stack_a, stack_b, current_a, last, smallest);
 }
 
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *top_node, t_stack *bottom_node, int *smallest)
 {
-	
 	if (top_node != NULL && bottom_node != NULL)
 	{
 		if (top_node->top_movements < bottom_node->bottom_movements)
@@ -129,23 +123,23 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			if(top_node == *stack_a)
 				check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
 		}
+	
 		else if(top_node->top_movements > bottom_node->bottom_movements)
 		{
-			
 			while (bottom_node != *stack_a)
-			{
 				rra(stack_a);
-				printf("top: %d\n", top_node->top_movements);
-				printf("bottom: %d\n", bottom_node->bottom_movements);
-			}
 			if(bottom_node == *stack_a)
 				check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
 		}
 		else if(top_node->top_movements == bottom_node->bottom_movements)
 		{
-			while (top_node != *stack_a || bottom_node != *stack_a)
+			while (top_node != *stack_a)
 				ra(stack_a);
-			if(top_node == *stack_a || bottom_node == *stack_a)
+			while(bottom_node != *stack_a)
+				rra(stack_a);
+			if(top_node == *stack_a)
+				check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
+			if(bottom_node == *stack_a)
 				check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
 		}
 		top_node = NULL;
@@ -158,63 +152,74 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 {
 	int i;
 	int j;
+	int	i2;
+	int	j2;
+	int	pushed;
 
 	i = 0;
 	j = 1;
+	i2 = 0;
+	j2 = 1;
+	pushed = 0;
+	int	movements = 0;
+	int	h = 0;
+	int	movements2 = 0;
+	int	h2 = 0;
+	t_stack *temp_b = *stack_b;
+	int *smallest_pushed = malloc(sizeof(int) * 20);
+	while(temp_b != NULL)
+	{
+		smallest_pushed[pushed] = temp_b->data;
+		temp_b = temp_b->next;
+		pushed++;
+	}
 	if (current_a == *stack_a)
 	{
-		i = 0;
-		j = 1;
 		if(*stack_b == NULL)
 			pb(stack_a, stack_b);
-		else if(current_a->data < (*stack_b)->data && ft_lstsize2(*stack_b) == 1) //currentpero sin el, hay cosas que funcionan
+		else if(current_a->data < (*stack_b)->data && ft_lstsize2(*stack_b) == 1)
 		{
-			printf("current: %d\n", current_a->data);
-			printf("stack_b: %d\n", (*stack_b)->data);
 			pb(stack_a, stack_b);
 			rb(stack_b);
 		}
 		else if(current_a->data > (*stack_b)->data && ft_lstsize2(*stack_b) == 1)
 			pb(stack_a, stack_b);
 		else if(current_a->data > (*stack_b)->data && current_a->data >= find_max_number(*stack_b) && (*stack_b)->data == find_max_number(*stack_b))
-		{
-			printf("current: %d\n", current_a->data);
-			printf("stack_b: %d\n", (*stack_b)->data);
-			printf("max number: %d\n", find_max_number(*stack_b));
 			pb(stack_a, stack_b); 
-		}
 		else if(current_a->data < get_last_node(*stack_b)->data && current_a->data <= find_min_number(*stack_b) && get_last_node(*stack_b)->data == find_min_number(*stack_b))
 		{
 			pb(stack_a, stack_b);
 			rb(stack_b);
 		}
-		else if (!((current_a->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((current_a->data > smallest[j] && (*stack_b)->data == smallest[j])))
+		else
 		{
-			while(smallest[i]) // A LO MEJOR TENGO QUE AGREGAR UN SMALLEST_PUSHED
+			while(smallest_pushed[i])
 			{
-				while(smallest[j])
+				while(smallest_pushed[j])
 				{
-					while(!((current_a->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((current_a->data > smallest[j] && (*stack_b)->data == smallest[j])))
+					if(!(current_a->data < smallest_pushed[i] && current_a->data > smallest_pushed[j]))
+						movements++;
+					while (h < movements + 1)
+					{
 						rb_or_rrb(stack_b);
-					if(((current_a->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i]) && (current_a->data > smallest[j] && (*stack_b)->data == smallest[j])))
+						h++;
+					}
+					if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
 						pb(stack_a, stack_b);
 					j++;
 				}
 				i++;
 			}
+				while (!is_descending_sorted(*stack_b))
+					rb_or_rrb(stack_b);
 		}
 	}
-		
 		if(last == *stack_a)
 		{
-			i = 0;
-			j = 1;
 			if(*stack_b == NULL)
 				pb(stack_a, stack_b);
-			else if(last->data < (*stack_b)->data && ft_lstsize2(*stack_b) == 1) //currentpero sin el, hay cosas que funcionan
+			else if(last->data < (*stack_b)->data && ft_lstsize2(*stack_b) == 1)
 			{
-				printf("current: %d\n", current_a->data);
-				printf("stack_b: %d\n", (*stack_b)->data);
 				pb(stack_a, stack_b);
 				rb(stack_b);
 			}
@@ -227,23 +232,31 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				pb(stack_a, stack_b);
 				rb(stack_b);
 			}
-		
-			else if ((!((last->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((last->data > smallest[j] && (*stack_b)->data == smallest[j]))))
+			else
 			{
-				while(smallest[i]) // A LO MEJOR TENGO QUE AGREGAR UN SMALLEST_PUSHED
+				while(smallest_pushed[i2])
 				{
-					while(smallest[j])
+					while(smallest_pushed[j2])
 					{
-						while(!((last->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((last->data > smallest[j] && (*stack_b)->data == smallest[j])))
+						if(!(last->data < smallest_pushed[i2] && last->data > smallest_pushed[j2]))
+							movements2++;
+						while (h2 < movements2 + 1)
+						{
 							rb_or_rrb(stack_b);
-						if(((last->data < smallest[i] && get_last_node(*stack_b)->data == smallest[i])) && ((last->data > smallest[j] && (*stack_b)->data == smallest[j])))
+							h2++;
+						}
+						if (last->data < get_last_node(*stack_b)->data &&  last->data > (*stack_b)->data)
 							pb(stack_a, stack_b);
-						j++;
+						j2++;
 					}
-					i++;
+					i2++;
 				}
+				while (!is_descending_sorted(*stack_b))
+					rb_or_rrb(stack_b);
 			}
+
 		}
+	free(smallest_pushed);
 		//Tal vez debo utilizar el mismo contador para last y para current_a ya que lo que quiero es que sume 1 cada vez que se haya utilizado un smallest?
 
 }

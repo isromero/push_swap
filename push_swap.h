@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/16 10:46:43 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/17 10:30:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest);
 int     is_descending_sorted(t_stack *stack);
 
+
 int    *save_20_smallest_chunk(t_stack *stack_a);
 void    push_to_b_good_position(t_stack *stack_b);
 void    sort_100(t_stack **stack_a, t_stack **stack_b);
@@ -91,5 +92,6 @@ int     rrb_short_path(t_stack *stack);
 int     top_to_bottom(t_stack *stack, t_stack *current_a);
 int     bottom_to_top(t_stack *stack, t_stack *last);
 int     find_index_of_selected(int *smallest, int selected);
+int top_to_bottom_modified(t_stack *stack, t_stack *last);
 
 #endif
