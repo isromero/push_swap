@@ -86,11 +86,19 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 			top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
 			print_stacks(stack_a, stack_b);
 			j++;
+            if(j == 20)
+            {
+                while(!is_descending_sorted(*stack_b))
+			        rb_or_rrb(stack_b);
+            }
 		}
 		free(smallest);
 		if (ft_lstsize2(*stack_b) == 100)
 			break ;
 	}
+    //ERROR HACIENDO RB RRB SEG FAULT AL PONER EL NUMERO 100, HAY QUE ORDENAR DE 20 EN 20 Y LUEGO LOS 100 
+    while(!is_descending_sorted(*stack_b))
+		rb_or_rrb(stack_b);
 	if(is_descending_sorted(*stack_b) && ft_lstsize2(*stack_b) == 100)
 	{
 		while(*stack_b != NULL)
@@ -226,8 +234,6 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				}
 				i++;
 			}
-				while (!is_descending_sorted(*stack_b))
-					rb_or_rrb(stack_b);
 		}
 	}
 		if(last == *stack_a)
@@ -267,8 +273,6 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 					}
 					i2++;
 				}
-				while (!is_descending_sorted(*stack_b))
-					rb_or_rrb(stack_b);
 			}
 
 		}
