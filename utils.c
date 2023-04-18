@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/17 17:56:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/18 10:42:18 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,21 @@ int find_max_number(t_stack *stack)
     return max_number;
 }
 
+t_stack *find_max_node(t_stack *stack)
+{
+    if (!stack)
+        return NULL;
+    t_stack *max_node = stack;
+    while (stack)
+    {
+        if (stack->data > max_node->data)
+            max_node = stack;
+        stack = stack->next;
+    }
+    return max_node;
+}
+
+
 int	ft_lstsize2(t_stack *lst)
 {
 	int	len;
@@ -86,16 +101,34 @@ int	ft_lstsize2(t_stack *lst)
 	return (len);
 }
 
-void   rb_or_rrb(t_stack **stack_b)
+void   rb_or_rrb(t_stack **stack_b, int movements)
 {
-    int size = ft_lstsize2(*stack_b);
-    int index = get_index(*stack_b, (*stack_b)->data);
-
-    size /= 2;
-    if(index < size)
-        rb(stack_b);
-    if(index > size)
+    if(movements + 1 > (ft_lstsize2(*stack_b) / 2))
         rrb(stack_b);
+}
+
+void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
+{
+    
+    int top_movements = top_to_bottom(*stack_b, selected);
+    int bottom_movements = bottom_to_top(get_last_node(*stack_b), selected);
+    
+    if(top_movements > bottom_movements)
+    {
+        while(selected != (*stack_b))
+            rrb(stack_b);
+    }
+    else if(top_movements < bottom_movements)
+    {
+        while(selected != (*stack_b))
+            rb(stack_b);
+    }
+    else
+    {
+        while(selected != (*stack_b))
+            rb(stack_b);
+    }
+        
 }
 
 int get_index(t_stack *stack, int value)

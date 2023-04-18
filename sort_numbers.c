@@ -75,35 +75,32 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	t_stack *current_a = *stack_a;
 	t_stack *current_a_last = get_last_node(*stack_a);
 
+    //j = 0;
 	for (i = 0; i < 100; i++) // 
 	{
-		int	*smallest = save_20_smallest_chunk(*stack_a);
-		j = 0;
-		while(j < 20)
-		{
-			current_a = *stack_a;
-			current_a_last = get_last_node(*stack_a);
-			top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
-			print_stacks(stack_a, stack_b);
-			j++;
-            if(j == 20)
-            {
-                while(!is_descending_sorted(*stack_b))
-			        rb_or_rrb(stack_b);
-            }
-		}
+		int	*smallest = save_20_smallest_chunk(*stack_a); //Al iterar cada vez, todo el rato se repite esto, por lo que el chunk 1 es actualizable y se va rellenando de 1 en uno, si se pushea 1 el chunk 1 ahora es 2-21
+		current_a = *stack_a;
+		current_a_last = get_last_node(*stack_a);
+		top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
+		//j++;
 		free(smallest);
 		if (ft_lstsize2(*stack_b) == 100)
 			break ;
 	}
+    if (ft_lstsize2(*stack_b) == 100)
+    {
+        while(!is_descending_sorted(*stack_b))
+            rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+        if(is_descending_sorted(*stack_b))
+        {
+            while(*stack_b != NULL)
+                pa(stack_a, stack_b);
+        }
+    }
+    
+
     //ERROR HACIENDO RB RRB SEG FAULT AL PONER EL NUMERO 100, HAY QUE ORDENAR DE 20 EN 20 Y LUEGO LOS 100 
-    while(!is_descending_sorted(*stack_b))
-		rb_or_rrb(stack_b);
-	if(is_descending_sorted(*stack_b) && ft_lstsize2(*stack_b) == 100)
-	{
-		while(*stack_b != NULL)
-			pa(stack_a, stack_b);
-	}
+
 	
 }
 
@@ -208,13 +205,18 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 		}
 		else if(current_a->data > (*stack_b)->data && ft_lstsize2(*stack_b) == 1)
 			pb(stack_a, stack_b);
-		else if(current_a->data > (*stack_b)->data && current_a->data >= find_max_number(*stack_b) && (*stack_b)->data == find_max_number(*stack_b))
-			pb(stack_a, stack_b); 
-		else if(current_a->data < get_last_node(*stack_b)->data && current_a->data <= find_min_number(*stack_b) && get_last_node(*stack_b)->data == find_min_number(*stack_b))
-		{
-			pb(stack_a, stack_b);
-			rb(stack_b);
-		}
+        else if(current_a->data >= find_max_number(*stack_b))
+        {
+                while(!(find_max_number(*stack_b) == (*stack_b)->data && find_min_number(*stack_b) == get_last_node(*stack_b)->data))
+                    rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+                pb(stack_a, stack_b);
+        }
+        else if(current_a->data <= find_min_number(*stack_b))
+        {
+                while(!(find_min_number(*stack_b) == get_last_node(*stack_b)->data && find_max_number(*stack_b) == (*stack_b)->data))
+                    rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+                pb(stack_a, stack_b);
+        }
 		else
 		{
 			while(smallest_pushed[i])
@@ -223,18 +225,31 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				{
 					if(!(current_a->data < smallest_pushed[i] && current_a->data > smallest_pushed[j]))
 						movements++;
-					while (h < movements + 1)
-					{
-						rb_or_rrb(stack_b);
-						h++;
-					}
-					if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
+                    if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
 						pb(stack_a, stack_b);
+                    if(movements > (ft_lstsize2(*stack_b) / 2))
+                    {
+                        while (h < movements + 1)
+					    {
+						    rrb(stack_b);
+						    h++;
+					    }
+                    }
+                    else if(movements <= (ft_lstsize2(*stack_b) / 2))
+                    {
+                        while (h < movements + 1)
+					    {
+						    rb(stack_b);
+						    h++;
+					    }
+                    }
+					
 					j++;
 				}
 				i++;
 			}
 		}
+
 	}
 		if(last == *stack_a)
 		{
@@ -247,13 +262,18 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			}
 			else if(last->data > (*stack_b)->data && ft_lstsize2(*stack_b) == 1)
 				pb(stack_a, stack_b);
-			else if(last->data > (*stack_b)->data && last->data >= find_max_number(*stack_b) && (*stack_b)->data == find_max_number(*stack_b)) 
-		   		pb(stack_a, stack_b); 
-			else if(last->data < get_last_node(*stack_b)->data && last->data <= find_min_number(*stack_b) && get_last_node(*stack_b)->data == find_min_number(*stack_b))
-			{
-				pb(stack_a, stack_b);
-				rb(stack_b);
-			}
+            else if(last->data >= find_max_number(*stack_b))
+            {
+                while(!(find_max_number(*stack_b) == (*stack_b)->data && find_min_number(*stack_b) == get_last_node(*stack_b)->data))
+                    rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+                pb(stack_a, stack_b);
+            }
+            else if(last->data <= find_min_number(*stack_b))
+            {
+                while(!(find_min_number(*stack_b) == get_last_node(*stack_b)->data && find_max_number(*stack_b) == (*stack_b)->data))
+                    rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+                pb(stack_a, stack_b);
+            }
 			else
 			{
 				while(smallest_pushed[i2])
@@ -262,19 +282,30 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 					{
 						if(!(last->data < smallest_pushed[i2] && last->data > smallest_pushed[j2]))
 							movements2++;
-						while (h2 < movements2 + 1)
-						{
-							rb_or_rrb(stack_b);
-							h2++;
-						}
-						if (last->data < get_last_node(*stack_b)->data &&  last->data > (*stack_b)->data)
+                        if (last->data < get_last_node(*stack_b)->data &&  last->data > (*stack_b)->data)
 							pb(stack_a, stack_b);
+						if(movements2 > (ft_lstsize2(*stack_b) / 2))
+                        {
+                            while (h2 < movements2 + 1)
+					        {
+						        rrb(stack_b);
+						        h2++;
+					        }
+                        }
+                        else if(movements2 <= (ft_lstsize2(*stack_b) / 2))
+                        {
+                            while (h2 < movements2 + 1)
+					        {
+						        rb(stack_b);
+						        h2++;
+					        }
+                        }
+						
 						j2++;
 					}
 					i2++;
 				}
 			}
-
 		}
 	free(smallest_pushed);
 		//Tal vez debo utilizar el mismo contador para last y para current_a ya que lo que quiero es que sume 1 cada vez que se haya utilizado un smallest?
