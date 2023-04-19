@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/18 10:42:18 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/19 10:52:24 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,47 @@ int	ft_lstsize2(t_stack *lst)
 	return (len);
 }
 
-void   rb_or_rrb(t_stack **stack_b, int movements)
+
+void rb_or_rrb(t_stack **stack_b, int *smallest_pushed)
 {
-    if(movements + 1 > (ft_lstsize2(*stack_b) / 2))
+    int ra_movements = 0;
+    int rra_movements = 0;
+    int i, j;
+
+    // Calcular movimientos para ra
+    i = 0;
+    while (smallest_pushed[i])
+    {
+        j = i + 1;
+        while (smallest_pushed[j])
+        {
+            if (!((*stack_b)->data < smallest_pushed[i] && (*stack_b)->data > smallest_pushed[j]))
+                ra_movements++;
+            j++;
+        }
+        i++;
+    }
+
+    // Calcular movimientos para rra
+    i = 0;
+    while (smallest_pushed[i])
+    {
+        j = i + 1;
+        while (smallest_pushed[j])
+        {
+            if (!((*stack_b)->data < smallest_pushed[j] && (*stack_b)->data > smallest_pushed[i]))
+                rra_movements++;
+            j++;
+        }
+        i++;
+    }
+    // Elegir acción
+    if (ra_movements <= rra_movements)
+        rb(stack_b);
+    else
         rrb(stack_b);
 }
+
 
 void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
 {
@@ -144,6 +180,21 @@ int get_index(t_stack *stack, int value)
         index++;
     }
     return index;
+}
+
+int get_index_bottom(t_stack *stack, int value)
+{
+    int index = 0;
+    t_stack *current = get_last_node(stack);
+    
+    while (current)
+    {
+        if (current->data == value)
+            return index;
+        current = current->prev;
+        index++;
+    }
+    return index + 1;
 }
 
 int   minimum_rotate_movements(t_stack *stack_a)

@@ -182,18 +182,13 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 	i2 = 0;
 	j2 = 1;
 	pushed = 0;
-	int	movements = 0;
-	int	h = 0;
-	int	movements2 = 0;
-	int	h2 = 0;
+	int h = 0;
+	int h2 = 0;
+	int	rb_movements = 0;
+	int rrb_movements = 0;
 	t_stack *temp_b = *stack_b;
+	t_stack *temp_b_last = get_last_node(*stack_b);
 	int *smallest_pushed = malloc(sizeof(int) * 20);
-	while(temp_b != NULL)
-	{
-		smallest_pushed[pushed] = temp_b->data;
-		temp_b = temp_b->next;
-		pushed++;
-	}
 	if (current_a == *stack_a)
 	{
 		if(*stack_b == NULL)
@@ -219,35 +214,35 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
         }
 		else
 		{
-			while(smallest_pushed[i])
+			while(temp_b != NULL)
 			{
-				while(smallest_pushed[j])
+				if(temp_b->next != NULL && current_a->data < temp_b->data && current_a->data > temp_b->next->data)
 				{
-					if(!(current_a->data < smallest_pushed[i] && current_a->data > smallest_pushed[j]))
-						movements++;
-                    if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
-						pb(stack_a, stack_b);
-                    if(movements > (ft_lstsize2(*stack_b) / 2))
-                    {
-                        while (h < movements + 1)
-					    {
-						    rrb(stack_b);
-						    h++;
-					    }
-                    }
-                    else if(movements <= (ft_lstsize2(*stack_b) / 2))
-                    {
-                        while (h < movements + 1)
-					    {
-						    rb(stack_b);
-						    h++;
-					    }
-                    }
-					
-					j++;
+					rb_movements = get_index(*stack_b, temp_b->next->data);
+					rrb_movements = get_index_bottom(*stack_b, temp_b->data);
 				}
-				i++;
+				temp_b = temp_b->next;
+				if (temp_b == NULL) 
+					break;
 			}
+			if (rb_movements <= rrb_movements)
+			{
+				while(h < rb_movements)
+				{
+					rb(stack_b);
+					h++;
+				}
+			}
+			else if (rb_movements > rrb_movements)
+			{
+				while(h < rrb_movements)
+				{
+					rrb(stack_b);
+					h++;
+				}
+			}
+			if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
+				pb(stack_a, stack_b);
 		}
 
 	}
@@ -276,41 +271,47 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
             }
 			else
 			{
-				while(smallest_pushed[i2])
+				while(temp_b != NULL)
 				{
-					while(smallest_pushed[j2])
+					if(temp_b->next != NULL && last->data < temp_b->data && last->data > temp_b->next->data)
 					{
-						if(!(last->data < smallest_pushed[i2] && last->data > smallest_pushed[j2]))
-							movements2++;
-                        if (last->data < get_last_node(*stack_b)->data &&  last->data > (*stack_b)->data)
-							pb(stack_a, stack_b);
-						if(movements2 > (ft_lstsize2(*stack_b) / 2))
-                        {
-                            while (h2 < movements2 + 1)
-					        {
-						        rrb(stack_b);
-						        h2++;
-					        }
-                        }
-                        else if(movements2 <= (ft_lstsize2(*stack_b) / 2))
-                        {
-                            while (h2 < movements2 + 1)
-					        {
-						        rb(stack_b);
-						        h2++;
-					        }
-                        }
-						
-						j2++;
+						printf("holaaa\n");
+						rb_movements = get_index(*stack_b, temp_b->next->data);
+						rrb_movements = get_index_bottom(*stack_b, temp_b->data);
 					}
-					i2++;
+					temp_b = temp_b->next;
+					if (temp_b == NULL) 
+						break;
+				}	
+				if (rb_movements <= rrb_movements && temp_b == NULL)
+				{
+					while(h2 < rb_movements)
+					{
+						rb(stack_b);
+						h2++;
+					}
 				}
+					
+				else if(rb_movements > rrb_movements)
+				{
+					while(h2 < rrb_movements)
+					{
+						rrb(stack_b);
+						h2++;
+					}
+				}
+				if (last->data < get_last_node(*stack_b)->data && last->data > (*stack_b)->data)
+					pb(stack_a, stack_b);
+				
 			}
 		}
-	free(smallest_pushed);
+		free(smallest_pushed);
+}
+		
+	
 		//Tal vez debo utilizar el mismo contador para last y para current_a ya que lo que quiero es que sume 1 cada vez que se haya utilizado un smallest?
 
-}
+
 
 
 
