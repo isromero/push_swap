@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/19 10:05:42 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:48:59 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ int		find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
 int		minimum_rotate_movements(t_stack *stack_a);
 void    rb_or_rrb_god(t_stack **stack_b, t_stack *selected);
-void    rb_or_rrb(t_stack **stack_b, int *smallest_pushed);
+void    rb_or_rrb(t_stack **stack_b);
+int bottom_to_top2(t_stack *stack, t_stack *last);
 t_stack *find_max_node(t_stack *stack);
 int		get_index(t_stack *stack, int value);
+
 int     get_index_bottom(t_stack *stack, int value);
 void    top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest);
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *top_node, t_stack *bottom_node, int *smallest);

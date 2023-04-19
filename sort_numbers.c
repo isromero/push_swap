@@ -75,14 +75,21 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	t_stack *current_a = *stack_a;
 	t_stack *current_a_last = get_last_node(*stack_a);
 
+	
+
     //j = 0;
-	for (i = 0; i < 100; i++) // 
+	for (i = 0; i < 5; i++) // 
 	{
+		j = 0;
 		int	*smallest = save_20_smallest_chunk(*stack_a); //Al iterar cada vez, todo el rato se repite esto, por lo que el chunk 1 es actualizable y se va rellenando de 1 en uno, si se pushea 1 el chunk 1 ahora es 2-21
-		current_a = *stack_a;
-		current_a_last = get_last_node(*stack_a);
-		top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
-		//j++;
+		while(j < 20)
+		{
+			current_a = *stack_a;
+			current_a_last = get_last_node(*stack_a);
+			top_and_bottom_plus_detector_smallest(stack_a, stack_b, current_a, current_a_last, smallest);
+			print_stacks(stack_a, stack_b);
+			j++;
+		}
 		free(smallest);
 		if (ft_lstsize2(*stack_b) == 100)
 			break ;
@@ -107,6 +114,7 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 
 void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest)
 {
+	
 	t_stack *temp = *stack_a;
 	int top_movements = 0;
 	int bottom_movements = 0;
@@ -135,6 +143,7 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *top_node, t_stack *bottom_node, int *smallest)
 {
+
 	if (top_node != NULL && bottom_node != NULL)
 	{
 		if (top_node->top_movements < bottom_node->bottom_movements)
@@ -163,14 +172,14 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			if(bottom_node == *stack_a)
 				check_position_to_push_b(stack_a, stack_b, top_node, bottom_node, smallest);
 		}
-		top_node = NULL;
-		bottom_node = NULL;
 	}
 }
 
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest)
 {
+
+	
 	int i;
 	int j;
 	int	i2;
@@ -187,7 +196,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 	int	rb_movements = 0;
 	int rrb_movements = 0;
 	t_stack *temp_b = *stack_b;
-	t_stack *temp_b_last = get_last_node(*stack_b);
+	t_stack *temp_save = *stack_b;
 	int *smallest_pushed = malloc(sizeof(int) * 20);
 	if (current_a == *stack_a)
 	{
@@ -216,35 +225,19 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 		{
 			while(temp_b != NULL)
 			{
+				
 				if(temp_b->next != NULL && current_a->data < temp_b->data && current_a->data > temp_b->next->data)
 				{
-					rb_movements = get_index(*stack_b, temp_b->next->data);
-					rrb_movements = get_index_bottom(*stack_b, temp_b->data);
+					temp_save = temp_b->next;
+					break ;
 				}
 				temp_b = temp_b->next;
-				if (temp_b == NULL) 
-					break;
 			}
-			if (rb_movements <= rrb_movements)
-			{
-				while(h < rb_movements)
-				{
-					rb(stack_b);
-					h++;
-				}
-			}
-			else if (rb_movements > rrb_movements)
-			{
-				while(h < rrb_movements)
-				{
-					rrb(stack_b);
-					h++;
-				}
-			}
+			printf("temp_save: %d\n", temp_save->data);
+			rb_or_rrb_god(stack_b, temp_save);
 			if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
 				pb(stack_a, stack_b);
 		}
-
 	}
 		if(last == *stack_a)
 		{
@@ -275,36 +268,19 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				{
 					if(temp_b->next != NULL && last->data < temp_b->data && last->data > temp_b->next->data)
 					{
-						printf("holaaa\n");
-						rb_movements = get_index(*stack_b, temp_b->next->data);
-						rrb_movements = get_index_bottom(*stack_b, temp_b->data);
+						temp_save = temp_b->next;
+						break ;
 					}
 					temp_b = temp_b->next;
-					if (temp_b == NULL) 
-						break;
-				}	
-				if (rb_movements <= rrb_movements && temp_b == NULL)
-				{
-					while(h2 < rb_movements)
-					{
-						rb(stack_b);
-						h2++;
-					}
 				}
-					
-				else if(rb_movements > rrb_movements)
-				{
-					while(h2 < rrb_movements)
-					{
-						rrb(stack_b);
-						h2++;
-					}
-				}
+				printf("temp_save: %d\n", temp_save->data);
+				rb_or_rrb_god(stack_b, temp_save);
 				if (last->data < get_last_node(*stack_b)->data && last->data > (*stack_b)->data)
 					pb(stack_a, stack_b);
-				
 			}
+
 		}
+
 		free(smallest_pushed);
 }
 		

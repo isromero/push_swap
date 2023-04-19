@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/19 10:52:24 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/19 19:18:22 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,52 +102,86 @@ int	ft_lstsize2(t_stack *lst)
 }
 
 
-void rb_or_rrb(t_stack **stack_b, int *smallest_pushed)
+// void rb_or_rrb(t_stack **stack_b, int *smallest_pushed)
+// {
+//     int ra_movements = 0;
+//     int rra_movements = 0;
+//     int i, j;
+
+//     // Calcular movimientos para ra
+//     i = 0;
+//     while (smallest_pushed[i])
+//     {
+//         j = i + 1;
+//         while (smallest_pushed[j])
+//         {
+//             if (!((*stack_b)->data < smallest_pushed[i] && (*stack_b)->data > smallest_pushed[j]))
+//                 ra_movements++;
+//             j++;
+//         }
+//         i++;
+//     }
+
+//     // Calcular movimientos para rra
+//     i = 0;
+//     while (smallest_pushed[i])
+//     {
+//         j = i + 1;
+//         while (smallest_pushed[j])
+//         {
+//             if (!((*stack_b)->data < smallest_pushed[j] && (*stack_b)->data > smallest_pushed[i]))
+//                 rra_movements++;
+//             j++;
+//         }
+//         i++;
+//     }
+//     // Elegir acción
+//     if (ra_movements <= rra_movements)
+//         rb(stack_b);
+//     else
+//         rrb(stack_b);
+// }
+
+void rb_or_rrb (t_stack **stack_b)
 {
-    int ra_movements = 0;
-    int rra_movements = 0;
-    int i, j;
-
-    // Calcular movimientos para ra
-    i = 0;
-    while (smallest_pushed[i])
+    int i = 0;
+    int j = 0;
+    t_stack *temp = *stack_b;
+    while (temp != NULL)
     {
-        j = i + 1;
-        while (smallest_pushed[j])
-        {
-            if (!((*stack_b)->data < smallest_pushed[i] && (*stack_b)->data > smallest_pushed[j]))
-                ra_movements++;
+        if (temp->data < (*stack_b)->data)
+            i++;
+        else
             j++;
-        }
-        i++;
+        temp = temp->next;
     }
-
-    // Calcular movimientos para rra
-    i = 0;
-    while (smallest_pushed[i])
+    if (i < j)
     {
-        j = i + 1;
-        while (smallest_pushed[j])
+        while (i > 0)
         {
-            if (!((*stack_b)->data < smallest_pushed[j] && (*stack_b)->data > smallest_pushed[i]))
-                rra_movements++;
-            j++;
+            rb(stack_b);
+            i--;
         }
-        i++;
     }
-    // Elegir acción
-    if (ra_movements <= rra_movements)
-        rb(stack_b);
     else
-        rrb(stack_b);
+    {
+        while (j > 0)
+        {
+            rrb(stack_b);
+            j--;
+        }
+    }
 }
-
 
 void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
 {
     
+    printf("selected: %d\n", selected->data);
     int top_movements = top_to_bottom(*stack_b, selected);
-    int bottom_movements = bottom_to_top(get_last_node(*stack_b), selected);
+    printf("top: %d\n", top_movements);
+    int bottom_movements = bottom_to_top2(*stack_b, selected);
+    printf("bottom: %d\n", bottom_movements);
+    
     
     if(top_movements > bottom_movements)
     {
@@ -164,7 +198,6 @@ void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
         while(selected != (*stack_b))
             rb(stack_b);
     }
-        
 }
 
 int get_index(t_stack *stack, int value)
@@ -215,8 +248,8 @@ int   minimum_rotate_movements(t_stack *stack_a)
 int top_to_bottom(t_stack *stack, t_stack *current_a)
 {
 	int count = 0;
-	int max = get_last_node(stack)->data;
-	while (stack && stack->data != max)
+
+	while (stack && stack->data != get_last_node(stack)->data)
 	{
         if (stack->data == current_a->data)
             break ;
@@ -224,6 +257,23 @@ int top_to_bottom(t_stack *stack, t_stack *current_a)
 		count++;
 	}
 	return count;
+}
+
+int bottom_to_top2(t_stack *stack, t_stack *last)
+{
+	int count = 0;
+    t_stack *temp = get_last_node(stack);
+
+	while (temp && temp != stack && temp->prev != NULL)
+	{
+        // printf("%d\n", temp->data);
+        //printf("%d\n", last->data);
+        if (temp->data == last->data)
+            break ;
+		temp = temp->prev;
+		count++;
+	}
+	return count + 1; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
 }
 
 int bottom_to_top(t_stack *stack, t_stack *last)
