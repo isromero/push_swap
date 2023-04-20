@@ -74,11 +74,9 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	printf("\n");
 	t_stack *current_a = *stack_a;
 	t_stack *current_a_last = get_last_node(*stack_a);
-
-	
-
-    //j = 0;
-	for (i = 0; i < 5; i++) // 
+	i = 0;
+    j = 0;
+	while (i < 5) // 
 	{
 		j = 0;
 		int	*smallest = save_20_smallest_chunk(*stack_a); //Al iterar cada vez, todo el rato se repite esto, por lo que el chunk 1 es actualizable y se va rellenando de 1 en uno, si se pushea 1 el chunk 1 ahora es 2-21
@@ -91,6 +89,7 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 			j++;
 		}
 		free(smallest);
+		i++;
 		if (ft_lstsize2(*stack_b) == 100)
 			break ;
 	}
@@ -104,11 +103,6 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
                 pa(stack_a, stack_b);
         }
     }
-    
-
-    //ERROR HACIENDO RB RRB SEG FAULT AL PONER EL NUMERO 100, HAY QUE ORDENAR DE 20 EN 20 Y LUEGO LOS 100 
-
-	
 }
 
 
@@ -143,7 +137,7 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *top_node, t_stack *bottom_node, int *smallest)
 {
-
+	
 	if (top_node != NULL && bottom_node != NULL)
 	{
 		if (top_node->top_movements < bottom_node->bottom_movements)
@@ -178,25 +172,10 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last, int *smallest)
 {
-
-	
-	int i;
-	int j;
-	int	i2;
-	int	j2;
-	int	pushed;
-
-	i = 0;
-	j = 1;
-	i2 = 0;
-	j2 = 1;
-	pushed = 0;
-	int h = 0;
-	int h2 = 0;
-	int	rb_movements = 0;
-	int rrb_movements = 0;
-	t_stack *temp_b = *stack_b;
-	t_stack *temp_save = *stack_b;
+	t_stack *temp_b = NULL;
+	t_stack *temp_b_last = NULL;
+	t_stack *temp_save = NULL;
+	t_stack *temp_save_last = NULL;
 	int *smallest_pushed = malloc(sizeof(int) * 20);
 	if (current_a == *stack_a)
 	{
@@ -223,6 +202,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
         }
 		else
 		{
+			temp_b = *stack_b;
 			while(temp_b != NULL)
 			{
 				
@@ -233,8 +213,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				}
 				temp_b = temp_b->next;
 			}
-			printf("temp_save: %d\n", temp_save->data);
-			rb_or_rrb_god(stack_b, temp_save);
+				rb_or_rrb_god(stack_b, temp_save);
 			if (current_a->data < get_last_node(*stack_b)->data && current_a->data > (*stack_b)->data)
 				pb(stack_a, stack_b);
 		}
@@ -264,32 +243,25 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
             }
 			else
 			{
-				while(temp_b != NULL)
+				temp_b_last = get_last_node(*stack_b);
+				while(temp_b_last != NULL)
 				{
-					if(temp_b->next != NULL && last->data < temp_b->data && last->data > temp_b->next->data)
+					if(temp_b_last->prev != NULL && last->data > temp_b_last->data && last->data < temp_b_last->prev->data)
 					{
-						temp_save = temp_b->next;
+						temp_save_last = temp_b_last;
 						break ;
 					}
-					temp_b = temp_b->next;
+					temp_b_last = temp_b_last->prev;
 				}
-				printf("temp_save: %d\n", temp_save->data);
-				rb_or_rrb_god(stack_b, temp_save);
+				if (temp_save_last != NULL)
+        			rb_or_rrb_god(stack_b, temp_save_last);
 				if (last->data < get_last_node(*stack_b)->data && last->data > (*stack_b)->data)
 					pb(stack_a, stack_b);
 			}
-
 		}
-
 		free(smallest_pushed);
 }
-		
-	
-		//Tal vez debo utilizar el mismo contador para last y para current_a ya que lo que quiero es que sume 1 cada vez que se haya utilizado un smallest?
-
-
-
-
+//Tal vez debo utilizar el mismo contador para last y para current_a ya que lo que quiero es que sume 1 cada vez que se haya utilizado un smallest?
 
 //Actualmente estoy comprobando iteración a iteración, por ahora con el input que dejo abajo funciona hasta 5 veces, luego no encuentra el numero smallest 8 si no me equivoco:
 

@@ -11,6 +11,15 @@
         "type_traits": "c",
         "utility": "c",
         "variant": "c",
-        "chrono": "c"
-    }
+        "chrono": "c",
+        "string": "c",
+        "string_view": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/isromero/Documentos/42cursus/push_swap",
+            "binaryPath": "/home/isromero/Documentos/42cursus/push_swap/push_swap",
+            "binaryArgs": []
+        }
+    ]
 }

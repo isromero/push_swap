@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/19 19:18:22 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:56:28 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,61 @@
 
 int is_sorted(t_stack *stack)
 {
-    while (stack && stack->next)
+    t_stack *temp = temp;
+    while (temp && temp->next)
     {
-        if (stack->data > stack->next->data)
+        if (temp->data > temp->next->data)
             return 0;
-        stack = stack->next;
+        temp = temp->next;
     }
     return 1;
 }
 
 int is_descending_sorted(t_stack *stack)
 {
-    while (stack && stack->next)
+    t_stack *temp = stack;
+    while (temp && temp->next)
     {
-        if (stack->data < stack->next->data)
+        if (temp->data < temp->next->data)
             return 0;
-        stack = stack->next;
+        temp = temp->next;
     }
     return 1;
 }
 
 t_stack	*get_last_node(t_stack *stack)
 {
-	if (!stack)
-		return (NULL);
-	while (stack->next != NULL)
-		stack = stack->next;
-	return (stack);
+    t_stack *temp = stack;
+	while (temp->next != NULL)
+		temp = temp->next;
+	return (temp);
 }
 
 int find_min_number(t_stack *stack)
 {
-    if(!stack)
-        return 0;
+    t_stack *temp = stack;
     int min_number = INT_MAX;
-    while (stack)
+    while (temp)
     {
-        if (stack->data < min_number)
+        if (temp->data < min_number)
         {
-            min_number = stack->data;
+            min_number = temp->data;
         }
             
-        stack = stack->next;
+        temp = temp->next;
     }
     return min_number;
 }
 
 int find_max_number(t_stack *stack)
-{    if(!stack)
-        return 0;
+{ 
+    t_stack *temp = stack;
     int max_number = INT_MIN;
-    while (stack)
+    while (temp)
     {
-        if (stack->data > max_number)
-            max_number = stack->data;
-        stack = stack->next;
+        if (temp->data > max_number)
+            max_number = temp->data;
+        temp = temp->next;
     }
     return max_number;
 }
@@ -78,11 +78,12 @@ t_stack *find_max_node(t_stack *stack)
     if (!stack)
         return NULL;
     t_stack *max_node = stack;
-    while (stack)
+    t_stack *temp = stack;
+    while (temp)
     {
-        if (stack->data > max_node->data)
-            max_node = stack;
-        stack = stack->next;
+        if (temp->data > max_node->data)
+            max_node = temp;
+        temp = temp->next;
     }
     return max_node;
 }
@@ -175,11 +176,12 @@ void rb_or_rrb (t_stack **stack_b)
 
 void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
 {
-    
+    int top_movements = 0;
+    int bottom_movements = 0;
     printf("selected: %d\n", selected->data);
-    int top_movements = top_to_bottom(*stack_b, selected);
+    top_movements = top_to_bottom(*stack_b, selected);
     printf("top: %d\n", top_movements);
-    int bottom_movements = bottom_to_top2(*stack_b, selected);
+    bottom_movements = bottom_to_top(*stack_b, selected);
     printf("bottom: %d\n", bottom_movements);
     
     
@@ -187,6 +189,7 @@ void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
     {
         while(selected != (*stack_b))
             rrb(stack_b);
+   
     }
     else if(top_movements < bottom_movements)
     {
@@ -197,8 +200,10 @@ void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
     {
         while(selected != (*stack_b))
             rb(stack_b);
+        
     }
 }
+
 
 int get_index(t_stack *stack, int value)
 {
@@ -248,12 +253,12 @@ int   minimum_rotate_movements(t_stack *stack_a)
 int top_to_bottom(t_stack *stack, t_stack *current_a)
 {
 	int count = 0;
-
-	while (stack && stack->data != get_last_node(stack)->data)
+    t_stack *temp = stack;
+	while (temp && temp->data != get_last_node(temp)->data)
 	{
-        if (stack->data == current_a->data)
+        if (temp->data == current_a->data)
             break ;
-		stack = stack->next;
+		temp = temp->next;
 		count++;
 	}
 	return count;
@@ -264,16 +269,16 @@ int bottom_to_top2(t_stack *stack, t_stack *last)
 	int count = 0;
     t_stack *temp = get_last_node(stack);
 
-	while (temp && temp != stack && temp->prev != NULL)
+	while (temp && temp->data != stack->data)
 	{
-        // printf("%d\n", temp->data);
+        //printf("%d\n", temp->data);
         //printf("%d\n", last->data);
         if (temp->data == last->data)
             break ;
 		temp = temp->prev;
 		count++;
 	}
-	return count + 1; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
+	return count; //Esto PUEDE QUE tenga que poner + 1 y se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
 }
 
 int bottom_to_top(t_stack *stack, t_stack *last)
@@ -291,7 +296,7 @@ int bottom_to_top(t_stack *stack, t_stack *last)
 		temp = temp->prev;
 		count++;
 	}
-	return count + 1; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
+	return count; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
 }
 
 int rrb_short_path(t_stack *stack)
