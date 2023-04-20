@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/20 10:56:28 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/20 11:02:27 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
     printf("selected: %d\n", selected->data);
     top_movements = top_to_bottom(*stack_b, selected);
     printf("top: %d\n", top_movements);
-    bottom_movements = bottom_to_top(*stack_b, selected);
+    bottom_movements = bottom_to_top2(*stack_b, selected);
     printf("bottom: %d\n", bottom_movements);
     
     
@@ -191,7 +191,7 @@ void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
             rrb(stack_b);
    
     }
-    else if(top_movements < bottom_movements)
+    else if(top_movements <= bottom_movements)
     {
         while(selected != (*stack_b))
             rb(stack_b);
