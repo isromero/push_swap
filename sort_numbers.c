@@ -205,7 +205,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			temp_b = *stack_b;
 			while(temp_b != NULL)
 			{
-				
+				//OJO QUE TEMP_B->NEXT ES NULL SIEMPRE TAMBIÉN 
 				if(temp_b->next != NULL && current_a->data < temp_b->data && current_a->data > temp_b->next->data)
 				{
 					temp_save = temp_b->next;
@@ -246,6 +246,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 				temp_b_last = get_last_node(*stack_b);
 				while(temp_b_last != NULL)
 				{
+					//NUNCA ENTRA EN EL IF PORQUE PREV SIEMPRE ES NULL
 					if(temp_b_last->prev != NULL && last->data > temp_b_last->data && last->data < temp_b_last->prev->data)
 					{
 						temp_save_last = temp_b_last;
@@ -253,7 +254,7 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 					}
 					temp_b_last = temp_b_last->prev;
 				}
-				if (temp_save_last != NULL)
+			
         			rb_or_rrb_god(stack_b, temp_save_last);
 				if (last->data < get_last_node(*stack_b)->data && last->data > (*stack_b)->data)
 					pb(stack_a, stack_b);
