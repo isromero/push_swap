@@ -146,28 +146,6 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_m
 			}
 			check_position_to_push_b(stack_a, stack_b);
 		}
-	
-
-	//Y ESTO NO:
-		// if (top_movements <= bottom_movements)
-		// {
-		// 	while (i < top_movements)
-		// 	{
-		// 		ra(stack_a);
-		// 		i++;
-		// 	}
-		// 	check_position_to_push_b(stack_a, stack_b);
-		// }
-	
-		// if(top_movements > bottom_movements)
-		// {
-		// 	while (i < bottom_movements)
-		// 	{
-		// 		rra(stack_a);
-		// 		i++;
-		// 	}
-		// 	check_position_to_push_b(stack_a, stack_b);
-		// }
 }
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b)
