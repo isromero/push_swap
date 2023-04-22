@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 15:01:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/07 22:20:48 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/22 09:12:32 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
 		node_add_back(stack_a, ft_atoi(argv[i]));
 		i++;
 	}
-    print_stacks(stack_a, stack_b);
+    //print_stacks(stack_a, stack_b);
 	return (0);
 }
 

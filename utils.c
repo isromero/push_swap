@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/20 11:02:27 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/22 08:54:34 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ int is_descending_sorted(t_stack *stack)
 
 t_stack	*get_last_node(t_stack *stack)
 {
-    t_stack *temp = stack;
-	while (temp->next != NULL)
-		temp = temp->next;
-	return (temp);
+	while (stack)
+	{
+		if (!stack->next)
+			return (stack);
+		stack = stack->next;
+	}
+	return (stack);
 }
 
 int find_min_number(t_stack *stack)
@@ -94,9 +97,10 @@ int	ft_lstsize2(t_stack *lst)
 	int	len;
 
 	len = 0;
-	while (lst)
+    t_stack *temp = lst;
+	while (temp)
 	{
-		lst = lst->next;
+		temp = temp->next;
 		len++;
 	}
 	return (len);
@@ -174,33 +178,20 @@ void rb_or_rrb (t_stack **stack_b)
     }
 }
 
-void   rb_or_rrb_god(t_stack **stack_b, t_stack *selected)
+void   rb_or_rrb_god(t_stack **stack, t_stack *selected)
 {
     int top_movements = 0;
-    int bottom_movements = 0;
-    printf("selected: %d\n", selected->data);
-    top_movements = top_to_bottom(*stack_b, selected);
-    printf("top: %d\n", top_movements);
-    bottom_movements = bottom_to_top2(*stack_b, selected);
-    printf("bottom: %d\n", bottom_movements);
-    
-    
-    if(top_movements > bottom_movements)
+    top_movements = top_to_bottom(*stack, selected);
+
+    if(top_movements <= ft_lstsize2(*stack) / 2)
     {
-        while(selected != (*stack_b))
-            rrb(stack_b);
-   
+        while(selected != (*stack))
+            rb(stack);
     }
-    else if(top_movements <= bottom_movements)
+    else 
     {
-        while(selected != (*stack_b))
-            rb(stack_b);
-    }
-    else
-    {
-        while(selected != (*stack_b))
-            rb(stack_b);
-        
+        while(selected != (*stack))
+            rrb(stack);
     }
 }
 
@@ -254,9 +245,10 @@ int top_to_bottom(t_stack *stack, t_stack *current_a)
 {
 	int count = 0;
     t_stack *temp = stack;
-	while (temp && temp->data != get_last_node(temp)->data)
+    
+	while (temp)
 	{
-        if (temp->data == current_a->data)
+        if (temp == current_a)
             break ;
 		temp = temp->next;
 		count++;
@@ -264,39 +256,19 @@ int top_to_bottom(t_stack *stack, t_stack *current_a)
 	return count;
 }
 
-int bottom_to_top2(t_stack *stack, t_stack *last)
+int bottom_to_top(t_stack *stack, t_stack *last)
 {
 	int count = 0;
     t_stack *temp = get_last_node(stack);
 
-	while (temp && temp->data != stack->data)
+	while (temp)
 	{
-        //printf("%d\n", temp->data);
-        //printf("%d\n", last->data);
-        if (temp->data == last->data)
+        if (temp == last)
             break ;
 		temp = temp->prev;
 		count++;
 	}
-	return count; //Esto PUEDE QUE tenga que poner + 1 y se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
-}
-
-int bottom_to_top(t_stack *stack, t_stack *last)
-{
-	int count = 0;
-    t_stack *top = stack;
-    t_stack *temp = stack;
-	int min = top->data;
-    
-    
-	while (temp && temp->data != min)
-	{
-        if (temp->data == last->data)
-            break ;
-		temp = temp->prev;
-		count++;
-	}
-	return count; //Esto PUEDE QUE se debe a que tengo que contar también el último rra para ponerlo encima, y no solo para llegar al número como con ra
+	return count + 1;
 }
 
 int rrb_short_path(t_stack *stack)
