@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/22 08:49:48 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/23 09:14:17 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ typedef struct s_stack {
 	int				data;
 	struct s_stack	*next;
     int             rank;
-    int             top_movements;
-    int             bottom_movements;
+    int             top_a_movements;
+    int             bottom_a_movements;
+    int             top_b_movements;
+    int             bottom_b_movements;
 }	t_stack;
 
 // typedef struct s_situation {
@@ -76,7 +78,8 @@ int 	find_max_number(t_stack *stack);
 int		find_min_number(t_stack *stack);
 t_stack	*get_last_node(t_stack *stack);
 int		minimum_rotate_movements(t_stack *stack_a);
-void    rb_or_rrb_god(t_stack **stack, t_stack *selected);
+void   rb_or_rrb_god(t_stack **stack, t_stack *selected);
+int find_min_number_smallest(int *smallest);
 void    rb_or_rrb(t_stack **stack_b);
 t_stack *find_max_node(t_stack *stack);
 int		get_index(t_stack *stack, int value);
@@ -87,17 +90,17 @@ int     is_descending_sorted(t_stack *stack);
 
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
-void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_movements, int bottom_movements);
+void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
 void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, int *smallest);
-
+int find_max_number_smallest(int *smallest);
 
 int    *save_20_smallest_chunk(t_stack *stack_a);
 void    push_to_b_good_position(t_stack *stack_b);
 void    sort_100(t_stack **stack_a, t_stack **stack_b);
 void    short_path_rb_or_rrb(t_stack **stack);
 int     rrb_short_path(t_stack *stack);
-int     top_to_bottom(t_stack *stack, t_stack *current_a);
-int     bottom_to_top(t_stack *stack, t_stack *last);
+int top_to_bottom(t_stack *stack, t_stack *selected);
+int     bottom_to_top(t_stack *stack, t_stack *selected);
 int     find_index_of_selected(int *smallest, int selected);
 int     top_to_bottom_modified(t_stack *stack, t_stack *last);
 

@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/22 08:54:34 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/23 08:19:43 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_stack	*get_last_node(t_stack *stack)
 	}
 	return (stack);
 }
-
 int find_min_number(t_stack *stack)
 {
     t_stack *temp = stack;
@@ -106,78 +105,6 @@ int	ft_lstsize2(t_stack *lst)
 	return (len);
 }
 
-
-// void rb_or_rrb(t_stack **stack_b, int *smallest_pushed)
-// {
-//     int ra_movements = 0;
-//     int rra_movements = 0;
-//     int i, j;
-
-//     // Calcular movimientos para ra
-//     i = 0;
-//     while (smallest_pushed[i])
-//     {
-//         j = i + 1;
-//         while (smallest_pushed[j])
-//         {
-//             if (!((*stack_b)->data < smallest_pushed[i] && (*stack_b)->data > smallest_pushed[j]))
-//                 ra_movements++;
-//             j++;
-//         }
-//         i++;
-//     }
-
-//     // Calcular movimientos para rra
-//     i = 0;
-//     while (smallest_pushed[i])
-//     {
-//         j = i + 1;
-//         while (smallest_pushed[j])
-//         {
-//             if (!((*stack_b)->data < smallest_pushed[j] && (*stack_b)->data > smallest_pushed[i]))
-//                 rra_movements++;
-//             j++;
-//         }
-//         i++;
-//     }
-//     // Elegir acción
-//     if (ra_movements <= rra_movements)
-//         rb(stack_b);
-//     else
-//         rrb(stack_b);
-// }
-
-void rb_or_rrb (t_stack **stack_b)
-{
-    int i = 0;
-    int j = 0;
-    t_stack *temp = *stack_b;
-    while (temp != NULL)
-    {
-        if (temp->data < (*stack_b)->data)
-            i++;
-        else
-            j++;
-        temp = temp->next;
-    }
-    if (i < j)
-    {
-        while (i > 0)
-        {
-            rb(stack_b);
-            i--;
-        }
-    }
-    else
-    {
-        while (j > 0)
-        {
-            rrb(stack_b);
-            j--;
-        }
-    }
-}
-
 void   rb_or_rrb_god(t_stack **stack, t_stack *selected)
 {
     int top_movements = 0;
@@ -195,6 +122,27 @@ void   rb_or_rrb_god(t_stack **stack, t_stack *selected)
     }
 }
 
+int find_max_number_smallest(int *smallest)
+{
+    int max = smallest[0];
+    for (int i = 1; i < 20; i++)
+    {
+        if (smallest[i] > max)
+            max = smallest[i];
+    }
+    return max;
+}
+
+int find_min_number_smallest(int *smallest)
+{
+    int min = smallest[0];
+    for (int i = 1; i < 20; i++)
+    {
+        if (smallest[i] < min)
+            min = smallest[i];
+    }
+    return min;
+}
 
 int get_index(t_stack *stack, int value)
 {
@@ -226,29 +174,14 @@ int get_index_bottom(t_stack *stack, int value)
     return index + 1;
 }
 
-int   minimum_rotate_movements(t_stack *stack_a)
-{
-    int size = ft_lstsize2(stack_a);
-    int index = get_index(stack_a, stack_a->data);
-    int movements;
-
-    size /= 2;
-    movements = 0;
-    if(index < size)
-        movements = index;
-    if(index > size)
-        movements = size + (size - index);
-    return (movements);
-}
-
-int top_to_bottom(t_stack *stack, t_stack *current_a)
+int top_to_bottom(t_stack *stack, t_stack *selected)
 {
 	int count = 0;
     t_stack *temp = stack;
     
 	while (temp)
 	{
-        if (temp == current_a)
+        if (temp == selected)
             break ;
 		temp = temp->next;
 		count++;
@@ -256,14 +189,14 @@ int top_to_bottom(t_stack *stack, t_stack *current_a)
 	return count;
 }
 
-int bottom_to_top(t_stack *stack, t_stack *last)
+int bottom_to_top(t_stack *stack, t_stack *selected)
 {
 	int count = 0;
     t_stack *temp = get_last_node(stack);
 
 	while (temp)
 	{
-        if (temp == last)
+        if (temp == selected)
             break ;
 		temp = temp->prev;
 		count++;
