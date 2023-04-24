@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 14:21:38 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:19:32 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct s_stack {
     int             bottom_b_movements;
 }	t_stack;
 
-// typedef struct s_situation {
-// 	t_stack	  *stack_a;
-// 	t_stack	  *stack_b;
-// }	t_situation;
-
+typedef struct		s_move
+{
+	char			*name;
+	struct s_move	*next;
+}					t_move;
 
 int		ft_ispace(char *str);
 void    only_numbers(int argc, char **argv);
@@ -90,7 +90,7 @@ int     is_descending_sorted(t_stack *stack);
 
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
-void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_movements, int bottom_movements);
+void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
 void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, int *smallest);
 int find_max_number_smallest(int *smallest);
 

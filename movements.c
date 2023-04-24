@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 15:08:08 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:14:17 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void	rb(t_stack **lst)
 	if(*lst)
 		(*lst)->prev = NULL;
 	printf("rb\n");
+	
 }
 
 //Se hace ra y rb a la vez
