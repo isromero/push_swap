@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/23 09:14:17 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:52:59 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int     is_descending_sorted(t_stack *stack);
 
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
-void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
+void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_movements, int bottom_movements);
 void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, int *smallest);
 int find_max_number_smallest(int *smallest);
 

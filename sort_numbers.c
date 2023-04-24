@@ -80,12 +80,12 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 		while(j < 20)
 		{
 			top_and_bottom_plus_detector_smallest(stack_a, stack_b, smallest);
-			//print_stacks(stack_a, stack_b);
+			print_stacks(stack_a, stack_b);
 			j++;
 		}
 		free(smallest);
 		i++;
-		if (ft_lstsize2(*stack_b) == 100)
+		if (ft_lstsize2(*stack_b) == 20)
 			break ;
 	}
     if (ft_lstsize2(*stack_b) == 100)
@@ -98,7 +98,7 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
                 pa(stack_a, stack_b);
         }
     }
-	print_stacks(stack_a, stack_b);
+	//print_stacks(stack_a, stack_b);
 }
 
 
@@ -107,111 +107,44 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 	
 	t_stack *current_a = *stack_a;
 	t_stack	*last = get_last_node(*stack_a);
-
-	while(!(current_a->data >= smallest[19] && current_a->data <= smallest[0]))
+	int top_movements = 0;
+	int bottom_movements = 0;
+	while(current_a != NULL && !(current_a->data >= smallest[19] && current_a->data <= smallest[0]))
 		current_a = current_a->next;
-	while (last && !(last->data >= smallest[19] && last->data <= smallest[0]))
+	while (last != NULL && !(last->data >= smallest[19] && last->data <= smallest[0]))
     	last = last->prev;
-	if (current_a->data >= smallest[19] && current_a->data <= smallest[0])
-		current_a->top_a_movements = top_to_bottom(*stack_a, current_a);
-	if(last && last->data >= smallest[19] && last->data <= smallest[0])
-		last->bottom_a_movements = bottom_to_top(*stack_a, last);
-	if(*stack_b != NULL && ft_lstsize2(*stack_b) > 2) 
+	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a->data >= smallest[19] && current_a->data <= smallest[0])
 	{
-		if(current_a->data >= find_max_number(*stack_b) || current_a->data <= find_min_number(*stack_b))
-			current_a->top_b_movements = top_to_bottom(*stack_b, find_max_node(*stack_b));
-		else if(last->data >= find_max_number(*stack_b) || last->data <= find_min_number(*stack_b))
-			last->bottom_b_movements = bottom_to_top(*stack_b, find_max_node(*stack_b));
-		else if(!(current_a->data >= find_max_number(*stack_b) || current_a->data <= find_min_number(*stack_b)))
-		{
-			t_stack *temp_b_current = *stack_b;
-			t_stack *temp_save_current = NULL;
-			while(temp_b_current)
-			{
-				if(temp_b_current->next != NULL && current_a->data < temp_b_current->data && current_a->data > temp_b_current->next->data)
-				{
-					temp_save_current = temp_b_current->next;
-					break ;
-				}
-				temp_b_current = temp_b_current->next;
-			}
-			current_a->top_b_movements = top_to_bottom(*stack_b, temp_save_current);
-		}
-		
-		else if(!(last->data >= find_max_number(*stack_b) || last->data <= find_min_number(*stack_b)))
-		{
-			t_stack *temp_b_last = *stack_b;
-			t_stack *temp_save_last = NULL;
-			while(temp_b_last)
-			{
-				if(temp_b_last->next != NULL && last->data < temp_b_last->data && last->data > temp_b_last->next->data)
-				{
-					temp_save_last = temp_b_last->next;
-					break ;
-				}
-				temp_b_last = temp_b_last->next;
-			}
-			last->bottom_b_movements = bottom_to_top(*stack_b, temp_save_last);
-		}
+		bottom_movements = bottom_to_top(*stack_a, last);
+		top_movements = top_to_bottom(*stack_a, current_a);
 	}
-	if(last && last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
-		movements_checker_to_push_b(stack_a, stack_b, current_a, last);
-	
-	
+	movements_checker_to_push_b(stack_a, stack_b, top_movements, bottom_movements);
 }
 
-void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last)
+void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_movements, int bottom_movements)
 {
 	int	i;
-		if ((*stack_a)->top_a_movements == 0)
-			check_position_to_push_b(stack_a, stack_b);
-		else if (current_a->top_a_movements <= last->bottom_a_movements)
-		{
-			i = 0;
-			
-			if(current_a->top_a_movements != current_a->top_b_movements && ft_lstsize2(*stack_b) > 2)
-			{
-				while (i <= current_a->top_a_movements)
-				{
-					ra(stack_a);
-					i++;
-				}
-				check_position_to_push_b(stack_a, stack_b);
-			}
-			if(current_a->top_a_movements == current_a->top_b_movements && ft_lstsize2(*stack_b) > 2)
-			{
-				while (i <= current_a->top_a_movements)
-				{
-					rr(stack_a, stack_b);
-					i++;
-				}
-				pb(stack_a, stack_b);
-			}
-		}
-		else if(current_a->top_a_movements > last->bottom_a_movements)
-		{
-			i = 0;
-			if(last->bottom_a_movements != last->bottom_b_movements && ft_lstsize2(*stack_b) > 2)
-			{
-				while (i <= last->bottom_a_movements)
-				{
-					rra(stack_a);
-					i++;
-				}
-				check_position_to_push_b(stack_a, stack_b);
-			}
-			if(last->bottom_a_movements == last->bottom_b_movements && ft_lstsize2(*stack_b) > 2)
-			{
-				while (i <= last->bottom_a_movements)
-				{
-					rrr(stack_a, stack_b);
-					i++;
-				}
-				pb(stack_a, stack_b);
-			}
-		}
-}
 
+    if (top_movements <= bottom_movements)
+    {
+        i = 0;
+        while (i < top_movements) 
+        {
+            ra(stack_a);
+            i++;
+        }
+    }
+    else
+    {
+        i = 0;
+        while (i < bottom_movements) 
+        {
+            rra(stack_a);
+            i++;
+        }
+    }
+    check_position_to_push_b(stack_a, stack_b);
+}
 
 
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b)
