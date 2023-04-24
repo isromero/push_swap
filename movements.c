@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 14:42:39 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:51:18 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 		(*stack_a)->prev = node_stack_b;
 	//Esto es necesario para actualizar el puntero que apunta al primer elemento de la lista de stack_a
 	*stack_a = node_stack_b;
-	(*stack_a)->prev = NULL;
+	if(*stack_a)
+		(*stack_a)->prev = NULL;
 	printf("pa\n");
 }
 
@@ -121,7 +122,8 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 		(*stack_b)->prev = node_stack_a;
 	//Esto es necesario para actualizar el puntero que apunta al primer elemento de la lista de stack_b
 	*stack_b = node_stack_a;
-	(*stack_b)->prev = NULL;
+	if(*stack_b)
+		(*stack_b)->prev = NULL;
 	printf("pb\n");
 }
 
@@ -152,6 +154,8 @@ void	ra(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	if(*lst)
+		(*lst)->prev = NULL;
 	printf("ra\n");
 }
 
@@ -180,6 +184,8 @@ void	rb(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	if(*lst)
+		(*lst)->prev = NULL;
 	printf("rb\n");
 }
 
