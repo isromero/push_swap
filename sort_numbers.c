@@ -16,22 +16,22 @@
 
 int    *save_20_smallest_chunk(t_stack *stack_a)
 {
-	int *smallest = malloc(sizeof(int) * 20);
+	int *smallest = malloc(sizeof(int) * 50);
 	int i;
 	int j;
 	t_stack *temp = stack_a;
 
 	// Guardamos los primeros 20 elementos en el array smallest
-	for (i = 0; i < 20 && temp; i++)
+	for (i = 0; i < 50 && temp; i++)
 	{
 		smallest[i] = temp->data;
 		temp = temp->next;
 	}
 
 	// Ordenamos el array smallest con el algoritmo de burbuja
-	for (i = 0; i < 20; i++)
+	for (i = 0; i < 49; i++)
 	{
-		for (j = 0; j < 20 - i; j++)
+		for (j = 0; j < 49 - i; j++)
 		{
 			if (smallest[j] < smallest[j + 1])
 			{
@@ -45,7 +45,7 @@ int    *save_20_smallest_chunk(t_stack *stack_a)
 	// Recorremos el resto del stack y actualizamos el array smallest si encontramos un elemento menor
 	while (temp)
 	{
-		for (i = 20; i >= 0; i--)
+		for (i = 49; i >= 0; i--)
 		{
 			if (temp->data < smallest[i])
 			{
@@ -73,22 +73,22 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 	i = 0;
     j = 0;
 
-	while (i < 5) // 
+	while (i < 10) // 
 	{
 		j = 0;
 		int	*smallest = save_20_smallest_chunk(*stack_a);
-		while(j < 20)
+		while(j < 50)
 		{
 			top_and_bottom_plus_detector_smallest(stack_a, stack_b, smallest);
-			print_stacks(stack_a, stack_b);
+			//print_stacks(stack_a, stack_b);
 			j++;
 		}
 		free(smallest);
 		i++;
-		if (ft_lstsize2(*stack_b) == 20)
+		if (ft_lstsize2(*stack_b) == 500)
 			break ;
 	}
-    if (ft_lstsize2(*stack_b) == 100)
+    if (ft_lstsize2(*stack_b) == 500)
     {
         while(!is_descending_sorted(*stack_b))
             rb_or_rrb_god(stack_b, find_max_node(*stack_b));
@@ -109,20 +109,16 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 	t_stack	*last = get_last_node(*stack_a);
 	int top_movements = 0;
 	int bottom_movements = 0;
-	while(current_a != NULL && !(current_a->data >= smallest[19] && current_a->data <= smallest[0]))
+	while(!(current_a->data >= smallest[49] && current_a->data <= smallest[0]))
 		current_a = current_a->next;
-	while (last != NULL && !(last->data >= smallest[19] && last->data <= smallest[0]))
+	while (!(last->data >= smallest[49] && last->data <= smallest[0]))
     	last = last->prev;
-	if(last && current_a && last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
+	if(last->data >= smallest[49] && last->data <= smallest[0] && current_a && current_a->data >= smallest[49] && current_a->data <= smallest[0])
 	{
-		printf("current selected: %d\n", current_a->data);
-		printf("last selected: %d\n", last->data);
 		bottom_movements = bottom_to_top(*stack_a, last);
 		top_movements = top_to_bottom(*stack_a, current_a);
-		printf("current movements: %d\n", top_movements);
-		printf("last movements: %d\n", bottom_movements);
 	}
-	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
+	if(last->data >= smallest[49] && last->data <= smallest[0] && current_a && current_a->data >= smallest[49] && current_a->data <= smallest[0])
 		movements_checker_to_push_b(stack_a, stack_b, top_movements, bottom_movements);
 }
 

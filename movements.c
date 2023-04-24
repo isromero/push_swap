@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 14:51:18 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:08:08 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	ra(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	first_node->prev = last_node;
 	if(*lst)
 		(*lst)->prev = NULL;
 	printf("ra\n");
@@ -184,6 +185,7 @@ void	rb(t_stack **lst)
 	last_node->next = first_node;
 	//Nos aseguramos que el último elemento, que antes era el primero, apunta a NULL para no entrar en bucle
 	first_node->next = NULL;
+	first_node->prev = last_node;
 	if(*lst)
 		(*lst)->prev = NULL;
 	printf("rb\n");
