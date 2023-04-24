@@ -113,12 +113,17 @@ void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b,
 		current_a = current_a->next;
 	while (last != NULL && !(last->data >= smallest[19] && last->data <= smallest[0]))
     	last = last->prev;
-	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a->data >= smallest[19] && current_a->data <= smallest[0])
+	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
 	{
+		printf("current selected: %d\n", current_a->data);
+		printf("last selected: %d\n", last->data);
 		bottom_movements = bottom_to_top(*stack_a, last);
 		top_movements = top_to_bottom(*stack_a, current_a);
+		printf("current movements: %d\n", top_movements);
+		printf("last movements: %d\n", bottom_movements);
 	}
-	movements_checker_to_push_b(stack_a, stack_b, top_movements, bottom_movements);
+	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
+		movements_checker_to_push_b(stack_a, stack_b, top_movements, bottom_movements);
 }
 
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_movements, int bottom_movements)
@@ -128,7 +133,7 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_m
     if (top_movements <= bottom_movements)
     {
         i = 0;
-        while (i < top_movements) 
+        while (i < top_movements) //TIENE QUE SER < 
         {
             ra(stack_a);
             i++;
@@ -137,7 +142,7 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, int top_m
     else
     {
         i = 0;
-        while (i < bottom_movements) 
+        while (i < bottom_movements) //TIENE QUE SER < 
         {
             rra(stack_a);
             i++;

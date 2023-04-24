@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/23 09:34:16 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:31:50 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 	// printf("indice_bottom: %d\n", get_index_bottom(stack_a, 3));
 	sort_100(&stack_a, &stack_b);
 	printf("\n");
-	print_stacks(&stack_a, &stack_b);
+	//print_stacks(&stack_a, &stack_b);
 	// if(argc == 101)
 	// {
 	// 	sort_100(&stack_a, &stack_b);
