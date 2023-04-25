@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 15:01:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 21:01:11 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/25 09:20:27 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void    only_numbers(int argc, char **argv)
     letter = 0;
     while(word < argc)
     {
+        letter = 0;
         while(argv[word][letter] != '\0')
         {
             if(ft_isalpha(argv[word][letter]))
             {
-                ft_putstr("Error, there are letters\n");
+                ft_putstr("Error\n");
                 exit(1);
             }
             letter++;  
@@ -66,7 +67,7 @@ void    duplicated_numbers(int argc, char **argv)
             num_j = ft_atoi(argv[j]);
             if(num_i == num_j)
                 {
-                    ft_putstr("Duplicated number\n");
+                    ft_putstr("Error\n");
                     exit(1);
                 }
             j++;
@@ -80,16 +81,13 @@ int input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
     int i;
 
     i = 1;
-    //only_numbers(argc, argv);
+    only_numbers(argc, argv);
     duplicated_numbers(argc, argv);
     while(i < argc)
 	{
-		// if (!good_input(argc, argv))
-		//     ft_putstr("error input\n");
 		node_add_back(stack_a, ft_atoi(argv[i]));
 		i++;
 	}
-    //print_stacks(stack_a, stack_b);
 	return (0);
 }
 
