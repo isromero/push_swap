@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 21:27:42 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 21:14:17 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/25 08:25:26 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,34 @@ void	rb(t_stack **lst)
 //Se hace ra y rb a la vez
 void	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	t_stack *first_node_a;
+	t_stack	*last_node_a;
+	t_stack *first_node_b;
+	t_stack	*last_node_b;
+	
+	first_node_a = *stack_a;
+	last_node_a = first_node_a;
+	first_node_b = *stack_b;
+	last_node_b = first_node_b;
+	
+	while(last_node_a->next)
+		last_node_a = last_node_a->next;
+	while(last_node_b->next)
+		last_node_b = last_node_b->next;
+
+	*stack_a = first_node_a->next;
+	*stack_b = first_node_b->next;
+	
+	last_node_a->next = first_node_a;
+	last_node_b->next = first_node_b;
+	first_node_a->next = NULL;
+	first_node_b->next = NULL;
+	first_node_a->prev = last_node_a;
+	first_node_b->prev = last_node_b;
+	if(*stack_a)
+		(*stack_a)->prev = NULL;
+	if(*stack_b)
+		(*stack_b)->prev = NULL;
 	printf("rr\n");
 }
 
@@ -281,7 +307,40 @@ void rrb(t_stack **lst)
 //Se hace rra y rrb a la vez
 void rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	t_stack *first_node_a;
+	t_stack	*last_node_a;
+	t_stack	*dont_lose_info_a;
+	t_stack *first_node_b;
+	t_stack	*last_node_b;
+	t_stack	*dont_lose_info_b;
+
+	first_node_a = *stack_a;
+	first_node_b = *stack_b;
+	last_node_a = first_node_a;
+	last_node_b = first_node_b;
+	
+	while(last_node_a->next)
+    {
+        dont_lose_info_a = last_node_a;
+		last_node_a = last_node_a->next;
+    }
+	while(last_node_b->next)
+    {
+        dont_lose_info_b = last_node_b;
+		last_node_b = last_node_b->next;
+    }
+	dont_lose_info_a->next = NULL;
+	dont_lose_info_b->next = NULL;
+    last_node_a->prev = NULL;
+    last_node_b->prev = NULL;
+    
+	last_node_a->next = first_node_a;
+	last_node_b->next = first_node_b;
+    first_node_a->prev = last_node_a;
+	first_node_b->prev = last_node_b;
+
+    //last_node apunta finalmente al principio de la lista
+    *stack_a = last_node_a;
+	*stack_b = last_node_b;
 	printf("rrr\n");
 }

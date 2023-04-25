@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/24 21:19:32 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/25 08:47:32 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,18 @@ int     get_index_bottom(t_stack *stack, int value);
 
 int     is_descending_sorted(t_stack *stack);
 
-
+int    *save_50_smallest_chunk(t_stack *stack_a);
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
-void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, int *smallest);
+void top_and_bottom_plus_detector_smallest_20(t_stack **stack_a, t_stack **stack_b, int *smallest);
+void top_and_bottom_plus_detector_smallest_50(t_stack **stack_a, t_stack **stack_b, int *smallest);
 int find_max_number_smallest(int *smallest);
 
 int    *save_20_smallest_chunk(t_stack *stack_a);
 void    push_to_b_good_position(t_stack *stack_b);
 void    sort_100(t_stack **stack_a, t_stack **stack_b);
+void    sort_500(t_stack **stack_a, t_stack **stack_b);
+void sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b);
 void    short_path_rb_or_rrb(t_stack **stack);
 int     rrb_short_path(t_stack *stack);
 int top_to_bottom(t_stack *stack, t_stack *selected);

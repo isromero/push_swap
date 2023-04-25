@@ -14,6 +14,56 @@
 
 #include "push_swap.h"
 
+int    *save_50_smallest_chunk(t_stack *stack_a)
+{
+	int *smallest = malloc(sizeof(int) * 50);
+	int i;
+	int j;
+	t_stack *temp = stack_a;
+
+	// Guardamos los primeros 20 elementos en el array smallest
+	for (i = 0; i < 50 && temp; i++)
+	{
+		smallest[i] = temp->data;
+		temp = temp->next;
+	}
+
+	// Ordenamos el array smallest con el algoritmo de burbuja
+	for (i = 0; i < 49; i++)
+	{
+		for (j = 0; j < 49 - i; j++)
+		{
+			if (smallest[j] < smallest[j + 1])
+			{
+				int tmp = smallest[j];
+				smallest[j] = smallest[j + 1];
+				smallest[j + 1] = tmp;
+			}
+		}
+	}
+
+	// Recorremos el resto del stack y actualizamos el array smallest si encontramos un elemento menor
+	while (temp)
+	{
+		for (i = 49; i >= 0; i--)
+		{
+			if (temp->data < smallest[i])
+			{
+				// Desplazamos los elementos mayores hacia la derecha para hacer espacio para el nuevo elemento
+				for (j = 0; j < i; j++)
+				{
+					smallest[j] = smallest[j + 1];
+				}
+				// Insertamos el nuevo elemento en la posición correcta
+				smallest[i] = temp->data;
+				break ;
+			}
+		}
+		temp = temp->next;
+	}
+	return smallest;
+}
+
 int    *save_20_smallest_chunk(t_stack *stack_a)
 {
 	int *smallest = malloc(sizeof(int) * 20);
@@ -64,6 +114,40 @@ int    *save_20_smallest_chunk(t_stack *stack_a)
 	return smallest;
 }
 
+void sort_500(t_stack **stack_a, t_stack **stack_b)
+{
+	int i;
+	int	j;
+	int	*smallest = save_50_smallest_chunk(*stack_a);
+	i = 0;
+    j = 0;
+
+	while (i < 10) // 
+	{
+		j = 0;
+		int	*smallest = save_50_smallest_chunk(*stack_a);
+		while(j < 50)
+		{
+			top_and_bottom_plus_detector_smallest_50(stack_a, stack_b, smallest);
+			j++;
+		}
+		free(smallest);
+		i++;
+		if (ft_lstsize2(*stack_b) == 500)
+			break ;
+	}
+    if (ft_lstsize2(*stack_b) == 500)
+    {
+        while(!is_descending_sorted(*stack_b))
+            rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+        if(is_descending_sorted(*stack_b))
+        {
+            while(*stack_b != NULL)
+                pa(stack_a, stack_b);
+        }
+    }
+}
+
 
 void sort_100(t_stack **stack_a, t_stack **stack_b)
 {
@@ -79,8 +163,7 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 		int	*smallest = save_20_smallest_chunk(*stack_a);
 		while(j < 20)
 		{
-			top_and_bottom_plus_detector_smallest(stack_a, stack_b, smallest);
-			//print_stacks(stack_a, stack_b);
+			top_and_bottom_plus_detector_smallest_20(stack_a, stack_b, smallest);
 			j++;
 		}
 		free(smallest);
@@ -98,11 +181,98 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
                 pa(stack_a, stack_b);
         }
     }
-	//print_stacks(stack_a, stack_b);
+}
+
+void sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b)
+{
+	int i;
+	int	j;
+	int	*smallest = save_20_smallest_chunk(*stack_a);
+	i = 0;
+    j = 0;
+
+	while (ft_lstsize2(*stack_a) != 0) // 
+	{
+		j = 0;
+		int	*smallest = save_20_smallest_chunk(*stack_a);
+		top_and_bottom_plus_detector_smallest_20(stack_a, stack_b, smallest);
+		free(smallest);
+		i++;
+		if (ft_lstsize2(*stack_a) == 0)
+			break ;
+	}
+    if (ft_lstsize2(*stack_a) == 0)
+    {
+        while(!is_descending_sorted(*stack_b))
+            rb_or_rrb_god(stack_b, find_max_node(*stack_b));
+        if(is_descending_sorted(*stack_b))
+        {
+            while(*stack_b != NULL)
+                pa(stack_a, stack_b);
+        }
+    }
+}
+
+void top_and_bottom_plus_detector_smallest_50(t_stack **stack_a, t_stack **stack_b, int *smallest)
+{
+	
+	t_stack *current_a = *stack_a;
+	t_stack	*last = get_last_node(*stack_a);
+	int top_movements = 0;
+	int bottom_movements = 0;
+	while(!(current_a->data >= smallest[49] && current_a->data <= smallest[0]))
+		current_a = current_a->next;
+	while (!(last->data >= smallest[49] && last->data <= smallest[0]))
+    	last = last->prev;
+	if(last->data >= smallest[49] && last->data <= smallest[0] && current_a && current_a->data >= smallest[49] && current_a->data <= smallest[0])
+	{
+		last->bottom_a_movements = bottom_to_top(*stack_a, last);
+		current_a->top_a_movements = top_to_bottom(*stack_a, current_a);
+	}
+	if(*stack_b != NULL && ft_lstsize2(*stack_b) > 2) 
+	{
+		if(current_a->data >= find_max_number(*stack_b) || current_a->data <= find_min_number(*stack_b))
+			current_a->top_b_movements = top_to_bottom(*stack_b, find_max_node(*stack_b));
+		else if(last->data >= find_max_number(*stack_b) || last->data <= find_min_number(*stack_b))
+			last->bottom_b_movements = bottom_to_top(*stack_b, find_max_node(*stack_b));
+		else if(!(current_a->data >= find_max_number(*stack_b) || current_a->data <= find_min_number(*stack_b)))
+		{
+			t_stack *temp_b_current = *stack_b;
+			t_stack *temp_save_current = NULL;
+			while(temp_b_current)
+			{
+				if(temp_b_current->next != NULL && current_a->data < temp_b_current->data && current_a->data > temp_b_current->next->data)
+				{
+					temp_save_current = temp_b_current->next;
+					break ;
+				}
+				temp_b_current = temp_b_current->next;
+			}
+			current_a->top_b_movements = top_to_bottom(*stack_b, temp_save_current);
+		}
+
+		else if(!(last->data >= find_max_number(*stack_b) || last->data <= find_min_number(*stack_b)))
+		{
+			t_stack *temp_b_last = *stack_b;
+			t_stack *temp_save_last = NULL;
+			while(temp_b_last)
+			{
+				if(temp_b_last->next != NULL && last->data < temp_b_last->data && last->data > temp_b_last->next->data)
+				{
+					temp_save_last = temp_b_last->next;
+					break ;
+				}
+				temp_b_last = temp_b_last->next;
+			}
+			last->bottom_b_movements = bottom_to_top(*stack_b, temp_save_last);
+		}
+	}
+	if(last->data >= smallest[49] && last->data <= smallest[0] && current_a && current_a->data >= smallest[49] && current_a->data <= smallest[0])
+		movements_checker_to_push_b(stack_a, stack_b, current_a, last);
 }
 
 
-void top_and_bottom_plus_detector_smallest(t_stack **stack_a, t_stack **stack_b, int *smallest)
+void top_and_bottom_plus_detector_smallest_20(t_stack **stack_a, t_stack **stack_b, int *smallest)
 {
 	
 	t_stack *current_a = *stack_a;
@@ -176,7 +346,7 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			}
 			check_position_to_push_b(stack_a, stack_b);
 		}
-		else if(current_a->top_a_movements == current_a->top_b_movements)
+		if(current_a->top_a_movements == current_a->top_b_movements)
 		{
 			while (i < current_a->top_a_movements)
 			{
@@ -198,8 +368,9 @@ void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *
 			}
 			check_position_to_push_b(stack_a, stack_b);
 		}
-		else if(last->bottom_a_movements == last->bottom_b_movements)
+		if(last->bottom_a_movements == last->bottom_b_movements)
 		{
+			
 			while (i < last->bottom_a_movements)
 			{
 				rrr(stack_a, stack_b);
@@ -252,3 +423,6 @@ void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b)
 				pb(stack_a, stack_b);
 		}	
 }
+
+
+//se podría hacer rr siempre y luego hacer los ra y rb restantes para el mayor, con rrr igual. (demasiado código tal vez)
