@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/25 09:37:32 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/26 09:25:11 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int main(int argc, char **argv)
 		sort_2(&stack_a);
 	if(argc == 4)
 		sort_3(&stack_a);
+	if(argc == 5)
+		sort_4(&stack_a, &stack_b);
     if(argc == 6)
 		sort_5(&stack_a, &stack_b);
 	if(argc == 101)
 		sort_100(&stack_a, &stack_b);
 	if(argc == 501)
 		sort_500(&stack_a, &stack_b);
-	else if(argc != 501 && argc != 101 && argc != 6 && argc != 4 && argc != 3)
+	else if(argc != 501 && argc != 101 && argc != 6 && argc != 5 && argc != 4 && argc != 3)
 		sort_everything_with_dynamic_chunks_20(&stack_a, &stack_b);
 	return (0);
 }

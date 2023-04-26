@@ -6,14 +6,13 @@
 #    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/04/04 21:35:40 by isromero         ###   ########.fr        #
+#    Updated: 2023/04/26 10:30:08 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 CC			=	gcc
-SRCS		=	push_swap.c check.c ready_stacks.c movements.c small_numbers.c sort_numbers.c utils.c
-SRCS_BONUS	=	
+SRCS		=	push_swap.c ready_stacks.c push_movements.c rotate_movements.c reverse_rotate_movements.c swap_movements.c sort_small.c sort_everything.c sort_100.c sort_500.c utils.c utils2.c
 
 LIBFT		=	libft/libft.a
 

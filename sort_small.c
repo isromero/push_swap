@@ -54,6 +54,16 @@ void    sort_3(t_stack **stack_a)
 		ra(stack_a);
 }
 
+void    sort_4(t_stack **stack_a, t_stack **stack_b)
+{
+	while(find_min_node(*stack_a) != (*stack_a))
+		ra_or_rra(stack_a, find_min_node(*stack_a));
+	if(find_min_node(*stack_a) == (*stack_a))
+		pb(stack_a, stack_b);
+	sort_3(stack_a);
+	pa(stack_a, stack_b);
+}
+
 void sort_5(t_stack **stack_a, t_stack **stack_b)
 {
 	pb(stack_a, stack_b);
@@ -62,10 +72,10 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 	sort_3(stack_a);
 	while (*stack_b)
 	{
-		int min_b = find_min_number(*stack_b);
-		int max_b = find_max_number(*stack_b);
-		int min_a = find_min_number(*stack_a);
-		int max_a = find_max_number(*stack_a);
+		int min_b = find_min_node(*stack_b)->data;
+		int max_b = find_max_node(*stack_b)->data;
+		int min_a = find_min_node(*stack_a)->data;
+		int max_a = find_max_node(*stack_a)->data;
 		if((min_b == (*stack_b)->data && min_b < min_a) || (*stack_b)->data < min_a)
 			pa(stack_a, stack_b);
 		else if((max_b == (*stack_b)->data && max_b > max_a || (*stack_b)->data > max_a))
@@ -73,7 +83,7 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 			pa(stack_a, stack_b);
 			ra(stack_a);
 		}
-		if(ft_lstsize2(*stack_a) == 3)
+		if(stack_size(*stack_a) == 3)
 		{
 			//Checkeamos si el primer nodo es el mínimo y es < que todos los nodos de A(3)
 		
@@ -90,7 +100,7 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 				ra(stack_a);
 			}   
 		}
-		if(ft_lstsize2(*stack_a) == 4)
+		if(stack_size(*stack_a) == 4)
 		{
 			//Checkeamos si el primer nodo es el mínimo y es < que todos los nodos de A(4) después de que quede 1 nodo en B
 			if((*stack_b)->data > (*stack_a)->data && (*stack_b)->data < (*stack_a)->next->data)
