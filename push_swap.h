@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 10:32:36 by isromero         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:09:14 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "libft_reduced/libft.h"
 
 typedef struct s_stack {
 	struct s_stack	*prev;
@@ -85,6 +85,7 @@ void 	sort_5(t_stack **stack_a, t_stack **stack_b);
 
 /*sort_everything.c*/
 void	sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b);
+void	save_rb_rrb_movements_for_rr_or_rrr(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
 
