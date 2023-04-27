@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/04/26 10:42:57 by isromero         ###   ########.fr        #
+#    Updated: 2023/04/27 09:07:53 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS		=	push_swap.c ready_stacks.c push_movements.c rotate_movements.c reverse_r
 
 LIBFT		=	libft_reduced/libft.a
 
-CFLAGS		=	
+CFLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 OBJS		=	$(SRCS:%.c=%.o)
 
