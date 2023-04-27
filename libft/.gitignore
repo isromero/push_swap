@@ -1,5 +1,0 @@
-#hidden files
-.DS_store
-*.o
-*.a
-a.out
