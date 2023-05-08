@@ -78,7 +78,7 @@ void sort_5(t_stack **stack_a, t_stack **stack_b)
 		int max_a = find_max_node(*stack_a)->data;
 		if((min_b == (*stack_b)->data && min_b < min_a) || (*stack_b)->data < min_a)
 			pa(stack_a, stack_b);
-		else if((max_b == (*stack_b)->data && max_b > max_a || (*stack_b)->data > max_a))
+		else if((max_b == (*stack_b)->data && max_b > max_a) || (*stack_b)->data > max_a)
 		{
 			pa(stack_a, stack_b);
 			ra(stack_a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_100.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:27:02 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 11:14:55 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:04:44 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void sort_100(t_stack **stack_a, t_stack **stack_b)
 {
 	int i;
 	int	j;
-	int	*smallest = save_20_smallest_chunk(*stack_a);
+	int	*smallest;
 
 	i = 0;
 	while (i < 5)
 	{
 		j = 0;
-		int	*smallest = save_20_smallest_chunk(*stack_a);
+		smallest = save_20_smallest_chunk(*stack_a);
 		while(j < 20)
 		{
 			top_and_bottom_plus_detector_smallest_20(stack_a, stack_b, smallest);
@@ -106,7 +106,7 @@ void top_and_bottom_plus_detector_smallest_20(t_stack **stack_a, t_stack **stack
 	}
 	//Calculo movimientos de rb y rrb
 	if(*stack_b != NULL && stack_size(*stack_b) > 2) 
-		save_rb_rrb_movements_for_rr_or_rrr(stack_a, stack_b, current_a, last);
+		save_rb_rrb_movements_for_rr_or_rrr(stack_b, current_a, last);
 
 	if(last->data >= smallest[19] && last->data <= smallest[0] && current_a && current_a->data >= smallest[19] && current_a->data <= smallest[0])
 		movements_checker_to_push_b(stack_a, stack_b, current_a, last);

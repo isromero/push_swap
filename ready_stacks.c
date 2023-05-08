@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 10:25:01 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:53:12 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void    duplicated_numbers(int argc, char **argv)
 	}
 }
 
-int input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
+int input_and_fill(int argc, char **argv, t_stack **stack_a)
 {
 	int i;
 

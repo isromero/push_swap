@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_everything.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:26:58 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 11:29:56 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:04:07 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b)
 {
 	int i;
-	int	j;
-	int	*smallest = save_20_smallest_chunk(*stack_a);
+	int	*smallest;
 	
 	i = 0;
 	while (stack_size(*stack_a) != 0) 
 	{
-		j = 0;
-		int	*smallest = save_20_smallest_chunk(*stack_a);
+		smallest = save_20_smallest_chunk(*stack_a);
 		top_and_bottom_plus_detector_smallest_20(stack_a, stack_b, smallest);
 		free(smallest);
 		i++;
@@ -33,7 +31,7 @@ void sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b
         pa(stack_a, stack_b);
 }
 
-void	save_rb_rrb_movements_for_rr_or_rrr(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last)
+void	save_rb_rrb_movements_for_rr_or_rrr(t_stack **stack_b, t_stack *current_a, t_stack *last)
 {
 	t_stack *temp_b_current;
 	t_stack *temp_b_last;

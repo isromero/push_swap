@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 11:09:14 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:54:57 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_stack {
 void	node_add_back(t_stack **lst, int data);
 void    only_numbers(int argc, char **argv);
 void    duplicated_numbers(int argc, char **argv);
-int 	input_and_fill(int argc, char **argv, t_stack **stack_a, t_stack **stack_b);
+int 	input_and_fill(int argc, char **argv, t_stack **stack_a);
 //void	print_stacks(t_stack **stack_a, t_stack **stack_b);
 
 /*push_movements.c*/
@@ -85,7 +85,7 @@ void 	sort_5(t_stack **stack_a, t_stack **stack_b);
 
 /*sort_everything.c*/
 void	sort_everything_with_dynamic_chunks_20(t_stack **stack_a, t_stack **stack_b);
-void	save_rb_rrb_movements_for_rr_or_rrr(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
+void	save_rb_rrb_movements_for_rr_or_rrr(t_stack **stack_b, t_stack *current_a, t_stack *last);
 void	movements_checker_to_push_b(t_stack **stack_a, t_stack **stack_b, t_stack *current_a, t_stack *last);
 void    check_position_to_push_b(t_stack **stack_a, t_stack **stack_b);
 

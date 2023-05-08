@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 21:30:47 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 10:18:06 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:58:11 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	stack_size(t_stack *stack)
 
 int is_sorted(t_stack *stack)
 {
-    t_stack *temp = temp;
+    t_stack *temp = stack;
     while (temp && temp->next)
     {
         if (temp->data > temp->next->data)
