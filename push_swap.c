@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 09:25:11 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/09 08:49:42 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 		exit(1);
-	input_and_fill(argc, argv, &stack_a, &stack_b);
+	input_and_fill(argc, argv, &stack_a);
 	if(argc == 3)
 		sort_2(&stack_a);
 	if(argc == 4)
@@ -38,6 +38,8 @@ int main(int argc, char **argv)
 		sort_500(&stack_a, &stack_b);
 	else if(argc != 501 && argc != 101 && argc != 6 && argc != 5 && argc != 4 && argc != 3)
 		sort_everything_with_dynamic_chunks_20(&stack_a, &stack_b);
+	print_stacks(&stack_a, &stack_b);
+	free_stack(&stack_a);
 	return (0);
 }
 

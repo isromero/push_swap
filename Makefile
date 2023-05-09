@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/04/27 09:07:53 by marvin           ###   ########.fr        #
+#    Updated: 2023/05/09 08:45:48 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 CC			=	gcc
-SRCS		=	push_swap.c ready_stacks.c push_movements.c rotate_movements.c reverse_rotate_movements.c swap_movements.c sort_small.c sort_everything.c sort_100.c sort_500.c utils.c utils2.c
+SRCS		=	push_swap.c ready_stacks.c push_movements.c rotate_movements.c reverse_rotate_movements.c swap_movements.c sort_small.c sort_everything.c sort_100.c sort_500.c utils.c utils2.c utils3.c
 
 LIBFT		=	libft_reduced/libft.a
 

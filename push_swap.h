@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/05/08 14:54:57 by isromero         ###   ########.fr       */
+/*   Updated: 2023/05/09 08:46:42 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	node_add_back(t_stack **lst, int data);
 void    only_numbers(int argc, char **argv);
 void    duplicated_numbers(int argc, char **argv);
 int 	input_and_fill(int argc, char **argv, t_stack **stack_a);
-//void	print_stacks(t_stack **stack_a, t_stack **stack_b);
+void	print_stacks(t_stack **stack_a, t_stack **stack_b);
 
 /*push_movements.c*/
 void	pa(t_stack **stack_a, t_stack **stack_b);
@@ -76,6 +76,9 @@ int		top_to_bottom(t_stack *stack, t_stack *selected);
 int		bottom_to_top(t_stack *stack, t_stack *selected);
 void	ra_or_rra(t_stack **stack, t_stack *selected);
 void	rb_or_rrb(t_stack **stack, t_stack *selected);
+
+/*utils3.c*/
+void	free_stack(t_stack **stack_a);
 
 /*sort_small.c*/
 void	sort_2(t_stack **stack_a);
