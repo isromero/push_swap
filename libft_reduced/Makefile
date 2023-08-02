@@ -6,7 +6,7 @@
 #    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 18:24:09 by daelee            #+#    #+#              #
-#    Updated: 2023/04/26 10:39:50 by isromero         ###   ########.fr        #
+#    Updated: 2023/08/02 21:06:26 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,5 @@ fclean:	clean
 		$(RM) $(NAME)
 
 re:	fclean $(NAME)
-
-bonus:			$(OBJS)
-				@ar rcs $(NAME) $(OBJS)
 
 .PHONY:			all clean fclean re
