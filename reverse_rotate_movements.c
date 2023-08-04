@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:41:58 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/03 19:58:10 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:25:30 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	rra(t_stack **lst)
 	printf("rra\n");
 }
 
-// El último nodo de stack_b pasa a ser el primero
 void	rrb(t_stack **lst)
 {
 	t_stack	*first_node;

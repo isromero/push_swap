@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:41:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/03 19:48:32 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:23:05 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	printf("pa\n");
 }
 
-//Coge el primer nodo de stack a y lo pone encima de stack b
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*node_stack_a;

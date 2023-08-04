@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 08:44:28 by isromero          #+#    #+#             */
-/*   Updated: 2023/05/09 08:44:28 by isromero         ###   ########.fr       */
+/*   Created: 2023/08/04 20:14:24 by isromero          #+#    #+#             */
+/*   Updated: 2023/08/04 20:14:24 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	free_stack(t_stack **stack_a)
 {
-	t_stack *temp;
-	while(*stack_a != NULL)
-    {
+	t_stack	*temp;
+
+	while (*stack_a != NULL)
+	{
 		temp = *stack_a;
-        *stack_a = (*stack_a)->next;
-        free(temp);
-    }
+		*stack_a = (*stack_a)->next;
+		free(temp);
+	}
 }

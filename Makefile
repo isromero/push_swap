@@ -6,13 +6,15 @@
 #    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/08/02 21:30:51 by isromero         ###   ########.fr        #
+#    Updated: 2023/08/04 20:32:48 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
 CC			=	gcc
-SRCS		=	push_swap.c ready_stacks.c push_movements.c rotate_movements.c reverse_rotate_movements.c swap_movements.c sort_small.c sort_everything.c sort_100.c sort_500.c utils.c utils2.c utils3.c
+SRCS		=	push_movements.c push_swap.c ready_stacks.c reverse_rotate_movements.c rotate_movements.c \
+				sort_2_3_4.c sort_5.c sort_100.c sort_500.c sort_everything.c sort_utils.c swap_movements.c \
+				utils.c utils2.c utils3.c
 
 LIBFT		=	libft_reduced/libft.a
 
