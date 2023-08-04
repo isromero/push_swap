@@ -6,13 +6,11 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:54:28 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:01:43 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* Añadir checkeo de si hay números ordenados no hacer nada */
 
 int	check_is_sorted(t_stack *stack_a)
 {
