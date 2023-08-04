@@ -6,24 +6,16 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:29:10 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:35:13 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:00:19 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	errors_atoi(int n, int res)
+static void	error_atoi(void)
 {
-	if (n == 1 && res > INT_MAX)
-	{
-		ft_putstr("Error\n");
-		exit(1);
-	}
-	else if (n == -1 && res > INT_MAX)
-	{
-		ft_putstr("Error\n");
-		exit(1);
-	}
+	ft_putstr("Error\n");
+	exit(1);
 }
 
 int	ft_atoi(const char *str)
@@ -48,6 +40,7 @@ int	ft_atoi(const char *str)
 		res = (str[p] - '0') + (res * 10);
 		p++;
 	}
-	errors_atoi(n, res);
+	if ((n == 1 || n == -1) && res > INT_MAX)
+		error_atoi();
 	return (res * n);
 }
