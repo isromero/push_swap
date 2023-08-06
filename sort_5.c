@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 20:17:23 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:17:43 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:28:03 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 	sort_3(stack_a);
 	while (*stack_b)
 	{
-		if ((find_min_node(*stack_b)->data == (*stack_b)->data && 
-				find_min_node(*stack_b)->data < find_min_node(*stack_a)->data)
+		if ((find_min_node(*stack_b)->data == (*stack_b)->data
+				&& find_min_node(*stack_b)->data
+				< find_min_node(*stack_a)->data)
 			|| (*stack_b)->data < find_min_node(*stack_a)->data)
 			pa(stack_a, stack_b);
-		else if ((find_max_node(*stack_b)->data == (*stack_b)->data && 
-				find_max_node(*stack_b)->data > find_max_node(*stack_a)->data)
+		else if ((find_max_node(*stack_b)->data == (*stack_b)->data
+				&& find_max_node(*stack_b)->data
+				> find_max_node(*stack_a)->data)
 			|| (*stack_b)->data > find_max_node(*stack_a)->data)
 		{
 			pa(stack_a, stack_b);

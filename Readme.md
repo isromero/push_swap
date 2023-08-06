@@ -1,4 +1,4 @@
-# Push Swap Project - 42
+# Push Swap
 
 This is the Push Swap project from the 42 school. The goal of this project is to sort a stack of numbers using a limited set of operations.
 

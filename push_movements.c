@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_movements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:41:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:23:05 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:28:35 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	if (!*stack_b)
 		return ;
 	node_stack_b = *stack_b;
-	*stack_b = node_stack_b->next; 
+	*stack_b = node_stack_b->next;
 	node_stack_b->next = *stack_a;
 	if (*stack_a)
 		(*stack_a)->prev = node_stack_b;
@@ -36,7 +36,7 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	if (!*stack_a)
 		return ;
 	node_stack_a = *stack_a;
-	*stack_a = node_stack_a->next; 
+	*stack_a = node_stack_a->next;
 	node_stack_a->next = *stack_b;
 	if (*stack_b)
 		(*stack_b)->prev = node_stack_a;

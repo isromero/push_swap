@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:51 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 21:01:43 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:28:48 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 	input_and_fill(argc, argv, &stack_a);
 	if (check_is_sorted(stack_a) == -1)
 		check_how_many_sort(argc, &stack_a, &stack_b);
-	/* print_stacks(&stack_a, &stack_b); */
 	free_stack(&stack_a);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 20:18:19 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:19:13 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:27:11 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ void	check_position_to_push_b(t_stack **stack_a, t_stack **stack_b)
 	else if ((*stack_a)->data >= find_max_node(*stack_b)->data
 		|| (*stack_a)->data <= find_min_node(*stack_b)->data)
 	{
-		while (!(find_max_node(*stack_b)->data == (*stack_b)->data && 
-				find_min_node(*stack_b)->data == get_last_node(*stack_b)->data))
+		while (!(find_max_node(*stack_b)->data == (*stack_b)->data
+				&& find_min_node(*stack_b)->data
+				== get_last_node(*stack_b)->data))
 			rb_or_rrb(stack_b, find_max_node(*stack_b));
 		pb(stack_a, stack_b);
 	}
