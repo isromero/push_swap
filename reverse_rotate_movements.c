@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate_movements.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:41:58 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 20:25:30 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:23:27 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	rra(t_stack **lst)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	*lst = last_node;
-	printf("rra\n");
+	ft_putstr("rra\n");
 }
 
 void	rrb(t_stack **lst)
@@ -55,7 +55,7 @@ void	rrb(t_stack **lst)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	*lst = last_node;
-	printf("rrb\n");
+	ft_putstr("rrb\n");
 }
 
 void	reverse_stack(t_stack **stack)
@@ -90,5 +90,5 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 	reverse_stack(stack_b);
 	(*stack_a)->prev = last_node_a;
 	(*stack_b)->prev = last_node_b;
-	printf("rrr\n");
+	ft_putstr("rrr\n");
 }

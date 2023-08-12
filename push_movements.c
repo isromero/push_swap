@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:41:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/06 17:28:35 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:22:36 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	*stack_a = node_stack_b;
 	if (*stack_a)
 		(*stack_a)->prev = NULL;
-	printf("pa\n");
+	ft_putstr("pa\n");
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
@@ -43,5 +43,5 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	*stack_b = node_stack_a;
 	if (*stack_b)
 		(*stack_b)->prev = NULL;
-	printf("pb\n");
+	ft_putstr("pb\n");
 }

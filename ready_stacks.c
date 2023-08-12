@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/03 19:51:12 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:23:06 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,33 +102,4 @@ int	input_and_fill(int argc, char **argv, t_stack **stack_a)
 		stack_size++;
 	}
 	return (0);
-}
-
-void	print_stacks(t_stack **stack_a, t_stack **stack_b)
-{
-	t_stack	*node_a;
-	t_stack	*node_b;
-
-	node_a = *stack_a;
-	node_b = *stack_b;
-	while (node_a || node_b)
-	{
-		if (node_a)
-		{
-			printf("%d", node_a->data);
-			node_a = node_a->next;
-		}
-		else
-			printf("-");
-		printf("\t");
-		if (node_b)
-		{
-			printf("%d", node_b->data);
-			node_b = node_b->next;
-		}
-		else
-			printf("-");
-		printf("\n");
-	}
-	printf("a\tb\n");
 }

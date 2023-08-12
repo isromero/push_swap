@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 09:44:27 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/03 20:05:57 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:23:37 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ra(t_stack **lst)
 	first_node->prev = last_node;
 	if (*lst)
 		(*lst)->prev = NULL;
-	printf("ra\n");
+	ft_putstr("ra\n");
 }
 
 void	rb(t_stack **lst)
@@ -49,7 +49,7 @@ void	rb(t_stack **lst)
 	first_node->prev = last_node;
 	if (*lst)
 		(*lst)->prev = NULL;
-	printf("rb\n");
+	ft_putstr("rb\n");
 }
 
 void	rotate_stack(t_stack **stack)
@@ -75,5 +75,5 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate_stack(stack_a);
 	rotate_stack(stack_b);
-	printf("rr\n");
+	ft_putstr("rr\n");
 }
