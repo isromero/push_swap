@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:29:10 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/04 21:00:19 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/13 08:41:40 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	ft_atoi(const char *str)
 			n = n * -1;
 		p++;
 	}
-	while (str[p] >= '0' && str[p] <= '9')
+	while (str[p])
 	{
+		if (!(str[p] >= '0' && str[p] <= '9'))
+			error_atoi();
 		res = (str[p] - '0') + (res * 10);
 		p++;
 	}

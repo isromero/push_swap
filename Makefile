@@ -6,7 +6,7 @@
 #    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/23 19:25:57 by isromero          #+#    #+#              #
-#    Updated: 2023/08/04 20:32:48 by isromero         ###   ########.fr        #
+#    Updated: 2023/08/13 08:13:45 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS		=	push_movements.c push_swap.c ready_stacks.c reverse_rotate_movements.c r
 
 LIBFT		=	libft_reduced/libft.a
 
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Wextra
 RM			=	rm -f
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

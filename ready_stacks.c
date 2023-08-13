@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/12 14:23:06 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/13 08:42:38 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void	node_add_back(t_stack **lst, int data)
 	}
 }
 
-void	only_numbers(int argc, char **argv)
+void	only_numbers(char **argv, int word)
 {
-	int	word;
 	int	letter;
 
-	word = 1;
 	letter = 0;
-	while (word < argc)
+	while (argv[word])
 	{
 		letter = 0;
 		while (argv[word][letter] != '\0')
 		{
-			if (ft_isalpha(argv[word][letter]))
+			if (!(argv[word][letter] >= '0' && argv[word][letter] <= '9')
+			&& !(argv[word][letter + 1] >= '0'
+			&& argv[word][letter + 1] <= '9'))
 			{
 				ft_putstr("Error\n");
 				exit(1);
@@ -60,19 +60,17 @@ void	only_numbers(int argc, char **argv)
 	}
 }
 
-void	duplicated_numbers(int argc, char **argv)
+void	duplicated_numbers(char **argv, int i)
 {
 	int	j;
-	int	i;
 	int	num_i;
 	int	num_j;
 
-	i = 1;
-	while (i < argc)
+	while (argv[i])
 	{
 		num_i = ft_atoi(argv[i]);
 		j = i + 1;
-		while (j < argc)
+		while (argv[j])
 		{
 			num_j = ft_atoi(argv[j]);
 			if (num_i == num_j)
@@ -86,20 +84,42 @@ void	duplicated_numbers(int argc, char **argv)
 	}
 }
 
+void	one_argument_input(char **argv, t_stack **stack_a)
+{
+	int		i;
+	char	**splitted;
+
+	splitted = ft_split(argv[1], ' ');
+	only_numbers(splitted, 0);
+	duplicated_numbers(splitted, 0);
+	i = 0;
+	while (splitted[i])
+	{
+		node_add_back(stack_a, ft_atoi(splitted[i]));
+		i++;
+	}
+	i = 0;
+	while (splitted[i])
+		free(splitted[i++]);
+	free(splitted);
+}
+
 int	input_and_fill(int argc, char **argv, t_stack **stack_a)
 {
 	int	i;
-	int	stack_size;
 
-	stack_size = 0;
 	i = 1;
-	only_numbers(argc, argv);
-	duplicated_numbers(argc, argv);
-	while (i < argc)
+	if (argc == 2)
+		one_argument_input(argv, stack_a);
+	else if (argc != 2)
 	{
-		node_add_back(stack_a, ft_atoi(argv[i]));
-		i++;
-		stack_size++;
+		only_numbers(argv, 1);
+		duplicated_numbers(argv, 1);
+		while (argv[i])
+		{
+			node_add_back(stack_a, ft_atoi(argv[i]));
+			i++;
+		}
 	}
 	return (0);
 }

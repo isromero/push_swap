@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 15:38:24 by isromero          #+#    #+#             */
-/*   Updated: 2023/04/26 10:39:01 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:02:52 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ typedef struct s_list
 int		ft_atoi(const char *str);
 void	ft_putstr(char *s);
 int		ft_isalpha(int c);
+char	**ft_split(char const *s, char c);
 #endif

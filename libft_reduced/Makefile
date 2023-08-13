@@ -6,7 +6,7 @@
 #    By: isromero <isromero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/09 18:24:09 by daelee            #+#    #+#              #
-#    Updated: 2023/08/02 21:06:26 by isromero         ###   ########.fr        #
+#    Updated: 2023/08/12 21:02:37 by isromero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC				= gcc
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror -I.
 
-SRCS = ft_atoi.c ft_putstr.c ft_isalpha.c
+SRCS = ft_atoi.c ft_putstr.c ft_isalpha.c ft_split.c
 
 OBJS = $(SRCS:.c=.o)
 
