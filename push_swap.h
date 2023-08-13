@@ -6,7 +6,7 @@
 /*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/13 08:34:34 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/13 08:43:50 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	check_how_many_sort(int argc, t_stack **stack_a, t_stack **stack_b);
 void	node_add_back(t_stack **lst, int data);
 void	only_numbers(char **argv, int word);
 void	duplicated_numbers(char **argv, int i);
+void	one_argument_input(char **argv, t_stack **stack_a);
 int		input_and_fill(int argc, char **argv, t_stack **stack_a);
 
 /*reverse_rotate_movements.c*/
