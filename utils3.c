@@ -23,3 +23,14 @@ void	free_stack(t_stack **stack_a)
 		free(temp);
 	}
 }
+
+bool	contains_only_spaces(const char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str != ' ')
+			return (false);
+		str++;
+	}
+	return (true);
+}

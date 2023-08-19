@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:59:12 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/13 08:43:50 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:20:25 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_stack
 	int				bottom_a_movements;
 	int				top_b_movements;
 	int				bottom_b_movements;
+	int				how_many_one_arg;
 }					t_stack;
 
 /*push_movements.c*/
@@ -121,5 +122,6 @@ void	rb_or_rrb(t_stack **stack, t_stack *selected);
 
 /*utils3.c*/
 void	free_stack(t_stack **stack_a);
+bool	contains_only_spaces(const char *str);
 
 #endif

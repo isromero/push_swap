@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ready_stacks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isromero <isromero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isromero <isromero@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:48:56 by isromero          #+#    #+#             */
-/*   Updated: 2023/08/13 08:42:38 by isromero         ###   ########.fr       */
+/*   Updated: 2023/08/19 12:25:37 by isromero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	one_argument_input(char **argv, t_stack **stack_a)
 	while (splitted[i])
 	{
 		node_add_back(stack_a, ft_atoi(splitted[i]));
+		(*stack_a)->how_many_one_arg++;
 		i++;
 	}
 	i = 0;
